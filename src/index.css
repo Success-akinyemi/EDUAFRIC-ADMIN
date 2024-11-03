@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*{
+    font-family: "Montserrat", sans-serif;
+}
+
+@layer components{
+    .inputGroup{
+        @apply w-full flex flex-col gap-[6px] items-start justify-start
+    }
+    .input{
+        @apply w-full rounded-[8px] border-[1px] bg-[#fff] outline-none py-[10px] px-[14px] border-gray-300 text-[14px] font-normal text-gray-500
+    }
+    .label{
+        @apply text-[14px] font-medium text-gray-700
+    }
+    .pad1{
+        @apply px-3 tablet:px-2
+    }
+    .page{
+        @apply px-3 tablet:px-2
+    }
+    .section{
+        width: calc(100vw - 275px);
+    }
+    .card{
+        @apply bg-white border-[1px] rounded-[12px] p-6 border-gray-200
+    }
+}
+
+.link{
+    text-decoration: none;
+    color: ins
+    ;
+}
+
+/* Custom scrollbar styles */
+.scrollbar-thin::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: #D7E1f4; /* Track color */
+  }
+  
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background: #6C737F; /* Handle color */
+    border-radius: 10px; /* Rounded corners */
+  }
+  
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    background: #929292; /* Handle hover color */
+  }
