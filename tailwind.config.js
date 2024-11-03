@@ -14,6 +14,9 @@ export default {
           'text-color-3': '#929292',
 
           'error': '#D92D20',
+          'error-50': '#FEF3F2',
+
+          'success-50': '#ECFDF3',
 
           'graut-200': '#EAECF0',
           'gray-300': '#D0D5DD',

@@ -28,7 +28,7 @@
         width: calc(100vw - 275px);
     }
     .card{
-        @apply bg-white border-[1px] rounded-[12px] p-6 border-gray-200
+        @apply bg-white border-[1px] rounded-[12px] p-6 border-gray-200 shadow
     }
 }
 
