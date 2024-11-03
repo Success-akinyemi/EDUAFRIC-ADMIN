@@ -37,7 +37,7 @@ function SalesReport() {
         <div className="flex items-center ">
             {
                 timeFrame.map((item, idx) => (
-                    <div key={idx} className={`cursor-pointer text-[14px] font-medium text-gray-500 py-2 px-3 ${selectedTime === item.value ? 'bg-gray-100' : ''} `}>
+                    <div onClick={() => chooseTime(item.value)} key={idx} className={`cursor-pointer text-[14px] font-medium text-gray-500 py-2 px-3 ${selectedTime === item.value ? 'bg-gray-100' : ''} `}>
                         {item.name}
                     </div>
                 ))
