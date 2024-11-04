@@ -18,11 +18,12 @@ export default {
 
           'success-50': '#ECFDF3',
 
-          'graut-200': '#EAECF0',
+          'gray-200': '#EAECF0',
           'gray-300': '#D0D5DD',
           'gray-500': '#667085',
+          'gray-600': '#475467',
           'gray-700': '#344054',
-          'gray-9000': '#101828',
+          'gray-900': '#101828',
 
           'off-black': '#14142B'
         },

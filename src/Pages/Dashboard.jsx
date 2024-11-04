@@ -1,5 +1,6 @@
 import SalesReport from "../Components/DashboardUi/SalesReport"
 import Stats from "../Components/DashboardUi/Stats"
+import TopCourse from "../Components/DashboardUi/TopCourse"
 import Navbar from "../Components/Helpers/Navbar"
 import Sidebar from "../Components/Helpers/Sidebar"
 
@@ -16,13 +17,15 @@ function Dashboard() {
         <div className="w-[97%] m-auto mt-4 tablet:w-full flex flex-col gap-[30px]">
           <h2 className="text-off-black text-[30px] font-semibold" >Dashboard</h2>
 
-          <div className="gap-6">
+          <div className="flex flex-col gap-6">
             <Stats />
 
             <SalesReport />
           </div>
 
-          
+          <TopCourse />
+
+
         </div>
 
 
