@@ -92,7 +92,7 @@ function DataTable({ data, timeDate, setTimeDate }) {
   };
 
   return (
-    <div className="flex p-4 gap-[30px] bg-white border-[1px] border-white shadow-sm rounded-t-[12px]">
+    <div className="flex flex-col p-4 gap-[30px] bg-white border-[1px] border-white shadow-sm rounded-t-[12px]">
       
       <div className="flex w-full items-center justify-between">
         <div className="flex items-center gap-[50px]">
