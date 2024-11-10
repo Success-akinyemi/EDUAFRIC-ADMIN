@@ -28,3 +28,22 @@ export const Studentstats = [
         slug: 'negative'
     },
 ]
+
+export const studentList = [
+    {
+        name: 'All',
+        slug: 'all'
+    },
+    {
+        name: 'Active',
+        slug: 'acvtive',
+    },
+    {
+        name: 'Inactive',
+        slug: 'inactive'
+    },
+    {
+        name: 'Blacklist',
+        slug: 'blacklist'
+    }
+]

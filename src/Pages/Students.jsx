@@ -1,8 +1,12 @@
+import { useState } from "react";
 import Navbar from "../Components/Helpers/Navbar"
 import Sidebar from "../Components/Helpers/Sidebar"
 import Stats from "../Components/StudentUi/Stats"
+import StudentList from "../Components/StudentUi/StudentList"
 
 function Students() {
+  const [timeDate, setTimeDate] = useState();
+
     return (
         <div className="page relative">
           <div className="fixed w-[257px] h-[100vh] left-0 top-0">
@@ -18,6 +22,8 @@ function Students() {
               <div className="mt-8 mb-[30px]">
                 <Stats />
               </div>
+
+              <StudentList timeDate={timeDate} setTimeDate={setTimeDate} />
     
             </div>
     

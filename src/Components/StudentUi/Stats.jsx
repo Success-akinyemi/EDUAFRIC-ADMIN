@@ -16,7 +16,7 @@ function Stats({ timeDate, setTimeDate }) {
                     </h2>
                 </div>
 
-                <span className="flex mt-8">
+                <span className="flex mt-8 items-center gap-[2px]">
                     <MdOutlineShowChart className={`${item?.slug === 'positive' ? 'text-primary-color' : 'text-error'}`} />
                     <p className={`text-[14px] text-[#606060] font-semibold`}>
                         <span className={`${item?.slug === 'positive' ? 'text-primary-color' : 'text-error'}`} >{item?.percent}%</span>
