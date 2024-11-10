@@ -1,7 +1,7 @@
 import axios from "axios"
 
-axios.defaults.baseURL = import.meta.env.VITE_SERVER_URL
-
+//axios.defaults.baseURL = import.meta.env.VITE_SERVER_URL
+axios.defaults.baseURL = 'https://eduafric.onrender.com/api'
 export async function signin(formData) {
     try {
         const res = await axios.post('/admin/login', formData, {withCredentials: true})
