@@ -55,3 +55,19 @@
   .scrollbar-thin::-webkit-scrollbar-thumb:hover {
     background: #929292; /* Handle hover color */
   }
+
+  .spinner{
+    height: 35px;
+    width: 35px;
+    border: 4px solid #fff;
+    border-color: #fff transparent #fff transparent;
+    border-radius: 50%;
+    margin: 0 auto;
+    animation: spin 1.3s ease infinite;
+  }
+
+  @keyframes spin {
+    to{
+        transform: rotate(360deg);
+    }
+  }

@@ -1,7 +1,14 @@
 import { useState } from "react"
 import Button from "./Button"
+import { signin } from "../../Helpers/apis"
+import LoadingBtn from "./LoadingBtn"
+import { useNavigate } from "react-router-dom"
+import { useDispatch } from "react-redux"
+import { signInSuccess } from "../../Redux/User/adminSlice"
 
 function SigninCard({ setErrorCard }) {
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
   const [ nameError, setNameError ] = useState()
   const [ authError, setAuthError ] = useState()
   const [ showPassword, setShowPassword ] = useState(false)
@@ -16,7 +23,7 @@ function SigninCard({ setErrorCard }) {
     setFormData({ ...formData, [e.target.id]: e.target.value })
   }
 
-  const handleSignin = () => {
+  const handleSignin = async () => {
     if(!formData.name){
       setNameError('Enter Email or Staff Id')
       setTimeout(() => {
@@ -37,11 +44,18 @@ function SigninCard({ setErrorCard }) {
     try {
       setLoading(true)
 
-
-      setErrorCard('Invalid Credebtials')
-      setTimeout(() => {
-        setErrorCard()
-      }, 2000)
+      const res = await signin(formData)
+      if(res.success){
+        localStorage.setItem('edtechafricauth', res.token)
+        dispatch(signInSuccess(res?.data))
+        setFormData({})
+        navigate('/dashboard')
+      } else {
+        setErrorCard(`${res.data}`)
+        setTimeout(() => {
+          setErrorCard()
+        }, 2000)
+      }
     } catch (error) {
       
     } finally {
@@ -79,8 +93,13 @@ function SigninCard({ setErrorCard }) {
       </div>
 
       {/**BUTTON */}
-      <Button disabled={loading} onCLick={handleSignin} text={'Sign in'} />
-
+      {
+        loading ? (
+          <LoadingBtn />
+        ) : (
+          <Button disabled={loading} onCLick={handleSignin} text={'Sign in'} />
+        )
+      }
 
     </div>
   )

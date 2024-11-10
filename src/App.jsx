@@ -11,6 +11,7 @@ import Messages from './Pages/Messages'
 import CMS from './Pages/CMS'
 import Advert from './Pages/Advert'
 import Settings from './Pages/Settings'
+import { AuthorizeAdmin } from './Auth/ProtectRoute'
 
 function App() {
   return (
@@ -21,15 +22,33 @@ function App() {
         <Routes>
           <Route path='/' element={<Signin />} />
 
-          <Route path='/dashboard' element={<Dashboard />} />
-          <Route path='/students' element={<Students />} />
-          <Route path='/instructors' element={<Instructors />} />
-          <Route path='/Organizations' element={<Organizations />} />
-          <Route path='/course' element={<Course />} />
-          <Route path='/messages' element={<Messages />} />
-          <Route path='/cms' element={<CMS />} />
-          <Route path='/advert' element={<Advert />} />
-          <Route path='/settings' element={<Settings />} />
+          <Route element={<AuthorizeAdmin />} >
+            <Route path='/dashboard' element={<Dashboard />} />
+          </Route>
+          <Route element={<AuthorizeAdmin />} >
+            <Route path='/students' element={<Students />} />
+          </Route>
+          <Route element={<AuthorizeAdmin />} >
+            <Route path='/instructors' element={<Instructors />} />
+          </Route>
+          <Route element={<AuthorizeAdmin />} >
+            <Route path='/Organizations' element={<Organizations />} />
+          </Route>
+          <Route element={<AuthorizeAdmin />} >
+            <Route path='/course' element={<Course />} />
+          </Route>
+          <Route element={<AuthorizeAdmin />} >
+            <Route path='/messages' element={<Messages />} />
+          </Route>
+          <Route element={<AuthorizeAdmin />} >
+            <Route path='/cms' element={<CMS />} />
+          </Route>
+          <Route element={<AuthorizeAdmin />} >
+            <Route path='/advert' element={<Advert />} />
+          </Route>
+          <Route element={<AuthorizeAdmin />} >
+            <Route path='/settings' element={<Settings />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </div>

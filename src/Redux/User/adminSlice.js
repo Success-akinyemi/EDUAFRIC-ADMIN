@@ -1,13 +1,13 @@
 import {createSlice} from '@reduxjs/toolkit'
 
 const initialState = {
-    currentUser: null,
+    currentAdmin: null,
     loading: false,
     error: false,
 };
 
-const userSlice = createSlice({
-    name: 'user',
+const adminSlice = createSlice({
+    name: 'admin',
     initialState,
     reducers: {
         signInStart: (state) => {
@@ -15,7 +15,7 @@ const userSlice = createSlice({
             state.error = null
         },
         signInSuccess: (state, action) => {
-            state.currentUser = action.payload;
+            state.currentAdmin = action.payload;
             state.loading = false;
             state.error = false;
         },
@@ -23,38 +23,38 @@ const userSlice = createSlice({
             state.loading = false;
             state.error = action.payload
         },
-        updateUserStart: (state) => {
+        updateAdminStart: (state) => {
             state.loading = true
         },
-        updateUserSuccess: (state, action) => {
-            state.currentUser = action.payload;
+        updateAdminSuccess: (state, action) => {
+            state.currentAdmin = action.payload;
             state.loading = false;
             state.error = false
         },
-        updateUserFailure: (state, action) => {
+        updateAdminFailure: (state, action) => {
             state.loading = false;
             state.error = action.payload
         },
-        deleteUserStart: (state) => {
+        deleteAdminStart: (state) => {
             state.loading = true
         },
-        deleteUserSuccess: (state) => {
-            state.currentUser = null;
+        deleteAdminSuccess: (state) => {
+            state.currentAdmin = null;
             state.loading = false;
             state.error = false
         },
-        deleteUserFailure: (state, action) => {
+        deleteAdminFailure: (state, action) => {
             state.loading = false;
             state.error = action.payload
         },
         signOut: (state) => {
-            state.currentUser = null;
+            state.currentAdmin = null;
             state.loading = false,
             state.error = false
         }
     },
 });
 
-export const { signInStart, signInSuccess, signInFailure, updateUserStart, updateUserSuccess, updateUserFailure, deleteUserStart, deleteUserSuccess, deleteUserFailure, signOut } = userSlice.actions;
+export const { signInStart, signInSuccess, signInFailure, updateAdminStart, updateAdminSuccess, updateAdminFailure, deleteAdminStart, deleteAdminSuccess, deleteAdminFailure, signOut } = adminSlice.actions;
 
-export default userSlice.reducer;
+export default adminSlice.reducer;

@@ -1,5 +1,6 @@
 import Navbar from "../Components/Helpers/Navbar"
 import Sidebar from "../Components/Helpers/Sidebar"
+import Stats from "../Components/StudentUi/Stats"
 
 function Students() {
     return (
@@ -13,6 +14,10 @@ function Students() {
     
             <div className="w-[97%] m-auto mt-4 tablet:w-full">
               <h2 className="text-off-black text-[30px] font-semibold" >Students</h2>
+
+              <div className="mt-8 mb-[30px]">
+                <Stats />
+              </div>
     
             </div>
     
