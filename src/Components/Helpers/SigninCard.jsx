@@ -2,7 +2,7 @@ import { useState } from "react"
 import Button from "./Button"
 import { signin } from "../../Helpers/apis"
 import LoadingBtn from "./LoadingBtn"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { useDispatch } from "react-redux"
 import { signInSuccess } from "../../Redux/User/adminSlice"
 
@@ -33,7 +33,7 @@ function SigninCard({ setErrorCard }) {
       return
     }
     if(!formData.password){
-      setAuthError('Enter Email or Staff Id')
+      setAuthError('Enter Password')
       setTimeout(() => {
         setAuthError()
       }, 2000)
@@ -88,7 +88,7 @@ function SigninCard({ setErrorCard }) {
             </span>
           </div>
           <p className="font-medium text-error text-[13px]">{authError}</p>
-          <p className="font-medium text-error text-[13px]">Forgot password</p>
+          <Link to={`/forgot-password`} className="font-medium text-error text-[13px]">Forgot password</Link>
         </div>
       </div>
 

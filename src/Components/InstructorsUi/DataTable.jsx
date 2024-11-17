@@ -8,20 +8,20 @@ import { FiMoreVertical } from "react-icons/fi";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { MdOutlineDeleteOutline } from "react-icons/md";
 import { Link } from "react-router-dom";
-import { blackListStudent } from "../../Helpers/apis";
+import { blackListInstructor, blackListStudent } from "../../Helpers/apis";
 import toast from "react-hot-toast";
 
 function DataTable({ data, loading, timeDate, setTimeDate }) {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState(""); // State for search input
-  const studentData = data || [];
+  const instructorData = data || [];
   const itemsPerPage = 6;
 
-  // Filter students based on the search term (studentID or email)
-  const filteredData = studentData.filter(
-    (student) =>
-      student.studentID.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      student.email.toLowerCase().includes(searchTerm.toLowerCase())
+  // Filter students based on the search term (instructorID or email)
+  const filteredData = instructorData.filter(
+    (instructor) =>
+      instructor?.instructorID?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      instructor?.email?.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   // Calculate the total number of pages for filtered data
@@ -107,31 +107,32 @@ function DataTable({ data, loading, timeDate, setTimeDate }) {
     }
   };
 
-  //TOGGLE BLACKLIST
-  const [ blacklisting, setBlacklisting ] = useState(false)
-  const handleBlacklsitStudent = async (value) => {
-    try {
-      setBlacklisting(true)
-      const res = await blackListStudent({ id: value })
-      if(res.success){
-        toast.success(res.data)
-        window.location.reload()
-      } else {
-        toast.error(res.data)
-      }
-    } catch {
 
-    } finally {
-      setBlacklisting(false)
-    }
-  };
+    //TOGGLE BLACKLIST
+    const [ blacklisting, setBlacklisting ] = useState(false)
+    const handleBlacklsitStudent = async (value) => {
+      try {
+        setBlacklisting(true)
+        const res = await blackListInstructor({ id: value })
+        if(res.success){
+          toast.success(res.data)
+          window.location.reload()
+        } else {
+          toast.error(res.data)
+        }
+      } catch {
+  
+      } finally {
+        setBlacklisting(false)
+      }
+    };
 
   return (
     <div className="flex flex-col p-4 gap-[30px] bg-white border-[1px] border-white shadow-sm rounded-t-[12px]">
       <div className="flex w-full items-center justify-between">
         <div className="flex items-center gap-[50px]">
           <h3 className="text-lg font-semibold text-[#121212]">
-            {filteredData.length} Students
+            {filteredData.length} Instructors
           </h3>
           <div className="flex items-center w-[400px] bg-white gap-[6px]">
             <CiSearch className="text-[28px] cursor-pointer" />
@@ -171,7 +172,7 @@ function DataTable({ data, loading, timeDate, setTimeDate }) {
                   Display Name
                 </th>
                 <th className="px-6 py-3 text-left text-gray-600 font-medium text-[12px] tracking-wider">
-                  Student ID
+                    Instructor ID
                 </th>
                 <th className="px-6 py-3 text-left text-gray-600 font-medium text-[12px] tracking-wider">
                   Email Address
@@ -198,7 +199,7 @@ function DataTable({ data, loading, timeDate, setTimeDate }) {
                       {student?.displayName}
                     </td>
                     <td className="px-6 py-4 text-[14px] font-normal text-[#13693B]">
-                      {student?.studentID}
+                      {student?.instructorID}
                     </td>
                     <td className="px-6 py-4 text-[14px] text-[#121212] font-normal">
                       {student?.email}
@@ -236,7 +237,7 @@ function DataTable({ data, loading, timeDate, setTimeDate }) {
                         {/* MODAL POPUP, visible only on hover */}
                         <div className="absolute z-50 top-8 flex flex-col gap-3 bg-white border-[1px] border-gray-200 shadow-lg rounded-[8px] p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 w-[170px]">
                           <Link
-                            to={`/student/${student._id}`}
+                            to={`/instructor/${student._id}`}
                             className="flex items-center gap-3 text-sm text-primary-color"
                           >
                             <MdOutlineRemoveRedEye />

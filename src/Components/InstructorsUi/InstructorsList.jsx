@@ -1,24 +1,25 @@
-import { useState } from "react";
-import { studentList } from "../../Data/students";
+import { instructorsList } from "../../Data/Instructors";
+import { fetchAllInstructors } from "../../Helpers/fetch.api";
 import DataTable from "./DataTable";
-import { fetchAllUsers } from "../../Helpers/fetch.api";
+import { useState } from "react";
 
-function StudentList({ timeDate, setTimeDate }) {
-    const { isFetchingUser, userData } = fetchAllUsers();
-    const studentData = userData?.data || [];
-    const listData = studentList;
+
+function InstructorsList({ timeDate, setTimeDate }) {
+    const { instructorsData: data, isFetchingInstructor } = fetchAllInstructors();
+    const instructorsData = data?.data || [];
+    const listData = instructorsList;
     const [cardState, setCardState] = useState(listData[0]?.slug);
 
     const handleCardChange = (value) => {
         setCardState(value);
     };
 
-    // Filter student data based on the selected cardState
-    const filteredData = studentData.filter((student) => {
+    // Filter instructor data based on the selected cardState
+    const filteredData = instructorsData.filter((instructor) => {
         if (cardState === 'all') return true;
-        if (cardState === 'active') return student.verified === true;
-        if (cardState === 'inactive') return student.verified === false;
-        if (cardState === 'blacklist') return student.blocked === true;
+        if (cardState === 'active') return instructor.verified === true;
+        if (cardState === 'inactive') return instructor.verified === false;
+        if (cardState === 'blacklist') return instructor.blocked === true;
         return true;
     });
 
@@ -45,10 +46,10 @@ function StudentList({ timeDate, setTimeDate }) {
             </div>
 
             <div>
-                <DataTable data={filteredData} loading={isFetchingUser} timeDate={timeDate} setTimeDate={setTimeDate} />
+                <DataTable data={filteredData} loading={isFetchingInstructor} timeDate={timeDate} setTimeDate={setTimeDate} />
             </div>
         </div>
     );
 }
 
-export default StudentList;
+export default InstructorsList

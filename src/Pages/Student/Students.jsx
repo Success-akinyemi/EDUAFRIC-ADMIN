@@ -1,8 +1,8 @@
 import { useState } from "react";
-import Navbar from "../Components/Helpers/Navbar"
-import Sidebar from "../Components/Helpers/Sidebar"
-import Stats from "../Components/StudentUi/Stats"
-import StudentList from "../Components/StudentUi/StudentList"
+import Navbar from "../../Components/Helpers/Navbar"
+import Sidebar from "../../Components/Helpers/Sidebar"
+import Stats from "../../Components/StudentUi/Stats"
+import StudentList from "../../Components/StudentUi/StudentList"
 
 function Students() {
   const [timeDate, setTimeDate] = useState();

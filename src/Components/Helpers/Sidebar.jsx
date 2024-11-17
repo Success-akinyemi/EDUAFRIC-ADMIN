@@ -4,6 +4,9 @@ import Logo from "./Logo"
 import { LuLogOut } from "react-icons/lu";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { signout } from "../../Helpers/apis.js";
+import toast from "react-hot-toast";
+import { signOut } from "../../Redux/User/adminSlice.js";
 
 function Sidebar() {
   const dispatch = useDispatch()
@@ -20,9 +23,12 @@ function Sidebar() {
     }
     try {
         setIsLoading(true)
-        //const res = await signoutUser()
-
-        navigate('/')
+        const res = await signout()
+        if(res.success){
+          toast.success(res.data)
+          dispatch(signOut())
+          navigate('/')
+        }
     } catch (error) {
         
     } finally {
@@ -53,7 +59,7 @@ function Sidebar() {
 
       <div onClick={handleSignout} className="mt-auto flex items-center gap-[21px] justify-center h-[86px] border-t-[1px] border-t-[#D9DBE9] text-[16px] hover:text-error cursor-pointer">
         <LuLogOut className="text-[24px]" />
-        Logout
+        { isLoading ? 'Logging out...' :  'Logout'}
       </div>
     </div>
   )
