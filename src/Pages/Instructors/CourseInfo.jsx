@@ -338,6 +338,7 @@ function CourseInfo({ setSelectedCard }) {
                   </div>
                 )
               }
+              
           </div>
         )}
       </div>

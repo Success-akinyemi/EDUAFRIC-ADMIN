@@ -62,7 +62,7 @@ function App() {
             selectedCard && (
               <>
                 <div className='popup-overlay z-40 fixed flex items-center justify-center top-0 left-0 w-[100vw] h-[100vh] bg-[#A59B9B4D] '>
-                  <div className={`z-50 w-[551px] phone:w-[90%] h-auto m-auto rounded-[12px] border-[1px] p-[24px] flex flex-col gap-6 ${popupBg ? 'bg-gray-10' : 'bg-white'} border-gray-30`}>
+                  <div className={`z-50 w-[551px] bg-white shadow-xl rounded-[12px] p-4`}>
                     <div className='w-full'>
                         {renderPopup()}
                     </div>
