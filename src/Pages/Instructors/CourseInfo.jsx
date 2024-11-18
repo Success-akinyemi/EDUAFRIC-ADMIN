@@ -60,25 +60,15 @@ function CourseInfo({ setSelectedCard }) {
     }
   }
 
-  const [ rejectingCourse, setRejectingCourse ] = useState(false)
   const handleRejectCourse = async (id) => {
     setSelectedCard('rejectCourseModal')
-    return
-    try {
-      setRejectingCourse(true)
-      const res = await rejectCourse({ id: id })
-      if(res.success){
-        toast.success(res.data)
-        window.location.reload()
-      } else{
-        toast.error(res.data)
-      }
-    } catch (error) {
-      
-    } finally {
-      setRejectingCourse(false)
-    }
   }
+
+  
+  const handleBlockCourse = async (id) => {
+      setSelectedCard('blockCourseModal')
+  }
+
   return (
     <div className="page relative">
       <div className="fixed w-[257px] h-[100vh] left-0 top-0">
@@ -100,7 +90,7 @@ function CourseInfo({ setSelectedCard }) {
                 <Link onClick={handleGoBack} className="">
                   <IoIosArrowBack />
                 </Link>
-
+ 
                 <div className="">
                   <div className="flex items-center gap-[6px]">
                     <div className="flex items-center gap-4">
@@ -322,23 +312,29 @@ function CourseInfo({ setSelectedCard }) {
             </div>
 
             {/**ACTIONS BTN */}
-            {console.log('object', dataArray)}
               {
                 dataArray?.approved === "Pending" && (
                   <div className="flex mb-8 items-center justify-center gap-[56px]">
                     <div onClick={() => handleApproveCourse(dataArray?._id)} className="py-[10px] px-[18px] cursor-pointer text-white flex items-center justify-center shadow-sm border-[1px] rounded-[8px] bg-primary-color border-primary-color-2"> { approvingCourse ? 'Approving...' : 'Approve Course' }</div>
-                    <div onClick={() => handleRejectCourse(dataArray?._id)} className="py-[10px] px-[18px] cursor-pointer text-white flex items-center justify-center shadow-sm border-[1px] rounded-[8px] bg-error border-error"> { rejectingCourse ? 'Rejecting...' : 'Reject Course' } </div>
+                    <div onClick={() => handleRejectCourse(dataArray?._id)} className="py-[10px] px-[18px] cursor-pointer text-white flex items-center justify-center shadow-sm border-[1px] rounded-[8px] bg-error border-error"> { 'Reject Course' } </div>
                   </div>
                 )
               }
               {
                 dataArray?.approved === "Approved" && !dataArray?.isBlocked && (
                   <div className="flex mb-8 items-center justify-center gap-[56px]">
-                    <div onClick={() => handleRejectCourse(dataArray?._id)} className="py-[10px] px-[18px] cursor-pointer text-white flex items-center justify-center shadow-sm border-[1px] rounded-[8px] bg-error border-error"> { rejectingCourse ? 'Blocking...' : 'Block Course' } </div>
+                    <div onClick={() => handleBlockCourse(dataArray?._id)} className="py-[10px] px-[18px] cursor-pointer text-white flex items-center justify-center shadow-sm border-[1px] rounded-[8px] bg-error border-error"> { 'Block Course' } </div>
                   </div>
                 )
               }
-              
+              {
+                dataArray?.isBlocked && (
+                  <div className="flex mb-8 items-center justify-center gap-[56px]">
+                    <div onClick={() => handleApproveCourse(dataArray?._id)} className="py-[10px] px-[18px] cursor-pointer text-white flex items-center justify-center shadow-sm border-[1px] rounded-[8px] bg-error border-error"> { approvingCourse ? 'Unblocking' : 'UnBlock Course' } </div>
+                  </div>
+                )
+              }
+
           </div>
         )}
       </div>

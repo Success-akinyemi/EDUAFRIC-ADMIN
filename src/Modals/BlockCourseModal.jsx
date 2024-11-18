@@ -4,10 +4,10 @@ import LoadingBtn from "../Components/Helpers/LoadingBtn"
 import { rejectCourse } from "../Helpers/apis"
 import toast from "react-hot-toast"
 
-function RejectCourseModal({ setSelectedCard }) {
+function BlockCourseModal({ setSelectedCard }) {
     const loc = window.location.href
     const pathName = loc.split('/')[4]
-    const [ formData, setFormData ] = useState({ id: pathName })
+    const [ formData, setFormData ] = useState({ id: pathName, block: true })
     
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.id]: e.target.value})
@@ -16,10 +16,10 @@ function RejectCourseModal({ setSelectedCard }) {
         setSelectedCard(null)
     }
 
-    const [ rejectingCourse, setRejectingCourse ] = useState(false)
+    const [ blockingCourse, setBlockingCourse ] = useState(false)
     const handleRejectCourse = async () => {
         try {
-          setRejectingCourse(true)
+          setBlockingCourse(true)
           console.log('object', formData)
           const res = await rejectCourse(formData)
           if(res.success){
@@ -31,7 +31,7 @@ function RejectCourseModal({ setSelectedCard }) {
         } catch (error) {
           
         } finally {
-          setRejectingCourse(false)
+          setBlockingCourse(false)
         }
       }
 
@@ -39,11 +39,11 @@ function RejectCourseModal({ setSelectedCard }) {
     <div className="flex w-full flex-col gap-5">
         <div className="flex items-center justify-center flex-col gap-1">
             <h2 className="text-center text-gray-900 text-lg font-semibold" >
-                Add Reason for Rejecting course
+                Add Blocking for Rejecting course
             </h2>
 
             <p className="text-sm text-gray-600 font-normal text-center">
-                This will pop up on the instructor screen for the rejection of the course so he/she can mend the right amendments
+                This will pop up on the instructor screen for blocked courses so he/she can mend the right amendments
             </p>
         </div>
 
@@ -63,11 +63,11 @@ function RejectCourseModal({ setSelectedCard }) {
 
         <div className="mt-[4px] flex flex-col gap-3">
             {
-                rejectingCourse ? (
-                    <LoadingBtn style={``} />
+                blockingCourse ? (
+                    <LoadingBtn style={`bg-red-500 border-none`} />
                 ) : (
                     <>
-                        <Button onCLick={handleRejectCourse} text={'Send'}  />
+                        <Button onCLick={handleRejectCourse} text={'Block'} style={`bg-red-500 border-none hover:bg-red-600 text-white`}  />
             
                         <Button onCLick={handleClosePopup} text={'Cancel'} style={`bg-transparent text-[#000000] border-[#D0D5DD] hover:bg-[#D0D5DD] hover:text-white`} />
                     </>
@@ -79,4 +79,4 @@ function RejectCourseModal({ setSelectedCard }) {
   )
 }
 
-export default RejectCourseModal
+export default BlockCourseModal

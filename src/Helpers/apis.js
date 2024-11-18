@@ -78,9 +78,9 @@ export async function approveCourse({ id }) {
 }
 
 //BLOCK AND UNBLOCK INSRTUCTOR
-export async function rejectCourse({ id }) {
+export async function rejectCourse(formData) {
     try {
-        const res = await axios.post('/course/rejectCourse', { id }, {withCredentials: true})
+        const res = await axios.post('/course/rejectCourse', formData, {withCredentials: true})
         return res.data
     } catch (error) {
         const res = error.response || 'Unable to reject instructors course'

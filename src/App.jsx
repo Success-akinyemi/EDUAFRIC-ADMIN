@@ -22,6 +22,7 @@ import ResetPassword from './Pages/ResetPassword'
 import ResetPasswordSent from './Pages/ResetPasswordSent'
 import { useEffect, useState } from 'react'
 import RejectCourseModal from './Modals/RejectCourseModal'
+import BlockCourseModal from './Modals/BlockCourseModal'
 
 function App() {
   const [ selectedCard, setSelectedCard ] = useState(null)
@@ -35,6 +36,12 @@ function App() {
             <RejectCourseModal setSelectedCard={setSelectedCard} />
           </div>
         ) 
+      case 'blockCourseModal':
+        return (
+          <div>
+            <BlockCourseModal setSelectedCard={setSelectedCard} />
+          </div>
+        )
     }
   }
 
