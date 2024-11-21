@@ -1,10 +1,10 @@
 import { useState } from "react"
 import Logo from "../Components/Helpers/Logo"
-import SigninCard from "../Components/Helpers/SigninCard"
 import PhoneImg from '../assets/images/phone.png'
 import ErrorImg from '../assets/images/error.png'
+import VerifyOtpCard from "../Components/Helpers/VerifyOtpCard"
 
-function Signin() {
+function VerifyOtp() {
   const [ errorCard, setErrorCard ] = useState()
   return (
     <div className="relative flex items-center justify-center w-[100vw] h-[100vh]">
@@ -14,7 +14,9 @@ function Signin() {
           <Logo imgStyle={'w-[90px]'} textStyle={`text-primary-color text-[36px]`} />
 
         </div>
-        <SigninCard setErrorCard={setErrorCard} />
+        
+        {/**CARD HERE */}
+        <VerifyOtpCard setErrorCard={setErrorCard} />
       </div>
 
       <div className="w-[40%] h-full flex items-center justify-center bg-gradient-to-bl from-[#FFE500] to-[#00BF63]">
@@ -42,4 +44,4 @@ function Signin() {
   )
 }
 
-export default Signin
+export default VerifyOtp

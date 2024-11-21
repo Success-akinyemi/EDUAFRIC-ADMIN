@@ -48,7 +48,7 @@ function ForgotPasswordCard({ setErrorCard }) {
       <div className="w-[574px] flex flex-col gap-16">
         {/**INTRO */}
         <div className="flex flex-col gap-[10px]">
-          <h3 className="text-text-color-1 text-[30px] font-bold">Forgot Password</h3>
+        <h3 className="text-text-color-1 text-[30px] font-bold">Welcome to EduAfrica</h3>
   
           <p className="text-[16px] font-normal text-text-color-2">Enter Staff ID or Email Address</p>
         </div>

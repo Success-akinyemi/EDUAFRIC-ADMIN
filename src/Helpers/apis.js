@@ -3,6 +3,26 @@ import axios from "axios"
 axios.defaults.baseURL = import.meta.env.VITE_SERVER_URL
 //axios.defaults.baseURL = 'https://eduafric.onrender.com/api'
 
+export async function signup(formData) {
+    try {
+        const res = await axios.post('/admin/register', formData, {withCredentials: true})
+        return res.data
+    } catch (error) {
+        const res = error.response || 'Unable to register user'
+        return res?.data
+    }
+}
+
+export async function verifyOtp(formData) {
+    try {
+        const res = await axios.post('/auth/verifyOtp', formData, {withCredentials: true})
+        return res.data
+    } catch (error) {
+        const res = error.response || 'Unable to verify OTP user'
+        return res?.data
+    }
+}
+
 export async function signin(formData) {
     try {
         const res = await axios.post('/admin/login', formData, {withCredentials: true})
@@ -42,7 +62,6 @@ export async function signout(formData) {
         return res?.data
     }
 }
-
 
 //BLOCK AND UNBLOCK STUDENT
 export async function blackListStudent({ id }) {
@@ -84,6 +103,17 @@ export async function rejectCourse(formData) {
         return res.data
     } catch (error) {
         const res = error.response || 'Unable to reject instructors course'
+        return res?.data
+    }
+}
+
+//BLOCK AND UNBLOCK ORGANIZATION
+export async function blackListOrganization({ id }) {
+    try {
+        const res = await axios.post('/organization/toggleblock', { id }, {withCredentials: true})
+        return res.data
+    } catch (error) {
+        const res = error.response || 'Unable to perform block action on student'
         return res?.data
     }
 }

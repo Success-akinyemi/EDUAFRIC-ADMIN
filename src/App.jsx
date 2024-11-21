@@ -5,8 +5,8 @@ import Signin from './Pages/Signin'
 import Dashboard from './Pages/Dashboard'
 import Students from './Pages/Student/Students'
 import Instructors from './Pages/Instructors/Instructors'
-import Organizations from './Pages/Organizations'
-import Course from './Pages/Course'
+import Organizations from './Pages/Organizations/Organizations'
+import Course from './Pages/Course/Course'
 import Messages from './Pages/Messages'
 import CMS from './Pages/CMS'
 import Advert from './Pages/Advert'
@@ -23,6 +23,13 @@ import ResetPasswordSent from './Pages/ResetPasswordSent'
 import { useEffect, useState } from 'react'
 import RejectCourseModal from './Modals/RejectCourseModal'
 import BlockCourseModal from './Modals/BlockCourseModal'
+import FileUpload from './Demo/fileUpload'
+import PasswordSuccess from './Pages/PasswordSuccess'
+import Signup from './Pages/Signup'
+import VerifyOtp from './Pages/VerifyOtp'
+import OrganizationDetails from './Pages/Organizations/OrganizationDetails'
+import OrganizationCourseInfo from './Pages/Organizations/OrganizationCourseInfo'
+import CoursesInfo from './Pages/Course/CoursesInfo'
 
 function App() {
   const [ selectedCard, setSelectedCard ] = useState(null)
@@ -83,10 +90,12 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<Signin />} />
+          <Route path='/signup' element={<Signup />} />
+          <Route path='/verify-otp' element={<VerifyOtp />} />
           <Route path='/forgot-password' element={<ForgotPassword />} />
           <Route path='/reset-password-sent' element={<ResetPasswordSent />} />
           <Route path='/reset-password/:token' element={<ResetPassword />} />
-
+          <Route path='/success' element={<PasswordSuccess />} />
 
           <Route element={<AuthorizeAdmin />} >
             <Route path='/dashboard' element={<Dashboard />} />
@@ -113,7 +122,16 @@ function App() {
             <Route path='/Organizations' element={<Organizations />} />
           </Route>
           <Route element={<AuthorizeAdmin />} >
+            <Route path='/organizations/:id' element={<OrganizationDetails />} />
+          </Route>
+          <Route element={<AuthorizeAdmin />} >
+            <Route path='/organization-course-info/:id' element={<OrganizationCourseInfo setSelectedCard={setSelectedCard} />} />
+          </Route>
+          <Route element={<AuthorizeAdmin />} >
             <Route path='/course' element={<Course />} />
+          </Route>
+          <Route element={<AuthorizeAdmin />} >
+            <Route path='/course-info/:id' element={<CoursesInfo setSelectedCard={setSelectedCard} />} />
           </Route>
           <Route element={<AuthorizeAdmin />} >
             <Route path='/messages' element={<Messages />} />
@@ -131,6 +149,7 @@ function App() {
 
         {/**DEMO */}
         <Route path='/demo/chat' element={<Chat />} />
+        <Route path='/demo/file-upload' element={<FileUpload />} />
         </Routes>
       </BrowserRouter>
     </div>

@@ -1,24 +1,23 @@
-
 import { useState } from "react"
 import Logo from "../Components/Helpers/Logo"
 import PhoneImg from '../assets/images/phone.png'
 import ErrorImg from '../assets/images/error.png'
-import ForgotPasswordCard from "../Components/Helpers/ForgotPasswordCard"
+import SignupCard from "../Components/Helpers/SignupCard"
 
-function ForgotPassword() {
+function Signup() {
     const [ errorCard, setErrorCard ] = useState()
     return (
       <div className="relative flex items-center justify-center w-[100vw] h-[100vh]">
         
         <div className="w-[60%] flex items-center justify-center flex-col">
-          <div className="mb-12 w-full ml-64">
-          <Logo imgStyle={'w-[90px]'} textStyle={`text-primary-color text-[36px]`} />
+          <div className="mb-5 w-full ml-64">
+            <Logo imgStyle={'w-[90px]'} textStyle={`text-primary-color text-[36px]`} />
   
           </div>
-          <ForgotPasswordCard setErrorCard={setErrorCard} />
+          <SignupCard setErrorCard={setErrorCard} />
         </div>
   
-        <div className="w-[40%] h-full flex items-center justify-center bg-gradient-to-bl from-[#FFE500] to-[#00BF63]">
+        <div className="w-[40%] min-h-[100%] flex items-center justify-center bg-gradient-to-bl from-[#FFE500] to-[#00BF63]">
   
           <img alt="signin page" src={PhoneImg} className="w-[45%]" />
   
@@ -43,4 +42,4 @@ function ForgotPassword() {
     )
 }
 
-export default ForgotPassword
+export default Signup

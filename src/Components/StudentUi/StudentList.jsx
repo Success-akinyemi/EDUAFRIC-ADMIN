@@ -29,7 +29,7 @@ function StudentList({ timeDate, setTimeDate }) {
                     <div
                         key={idx}
                         onClick={() => handleCardChange(item?.slug)}
-                        className={`pt-[1px] pb-[11px] px-[4px] cursor-pointer border-b-[2px] ${
+                        className={`pt-[1px] pb-[11px] px-[4px] cursor-pointer border-b-[2px] min-w-[102px] flex items-center justify-center ${
                             item?.slug === cardState ? 'border-b-primary-color' : 'border-b-[#D9DBE9]'
                         }`}
                     >

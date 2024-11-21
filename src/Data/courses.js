@@ -1,35 +1,35 @@
-export const Instructorsstats = [
+export const coursesstats = [
     {
-        id: 'totalinstructors',
-        name: 'Total Instructors',
+        id: 'totalcourse',
+        name: 'Total Course',
         total: 40,
         percent: 8.5,
         slug: 'positive'
     },
     {
-        id: 'totalactiveinstructors',
-        name: 'Total Active Instructors',
+        id: 'totalactivecourse',
+        name: 'Total Active Course',
         total: 102,
         percent: 1.3,
         slug: 'positive'
     },  
     {
-        id: 'totalinactiveinstructors',
-        name: 'Total Inactive Instructors',
+        id: 'totalinactivecourse',
+        name: 'Total Inactive Course',
         total: 44,
         percent: 4.3,
         slug: 'negative'
     },
     {
-        id: 'totalblacklistinstructors',
-        name: 'Total Blacklist Instructors',
+        id: 'totalblacklistcourse',
+        name: 'Total Blacklist Course',
         total: 4,
         percent: 4.3,
         slug: 'negative'
     },
 ]
 
-export const instructorsList = [
+export const courseList = [
     {
         name: 'All',
         slug: 'all'

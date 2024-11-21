@@ -11,7 +11,7 @@ function ResetPassword() {
         
         <div className="w-[60%] flex items-center justify-center flex-col">
           <div className="mb-12 w-full ml-64">
-            <Logo imgStyle={'w-[90px]'} />
+          <Logo imgStyle={'w-[90px]'} textStyle={`text-primary-color text-[36px]`} />
   
           </div>
           <ResetPasswordCard setErrorCard={setErrorCard} />

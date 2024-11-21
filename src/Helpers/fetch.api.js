@@ -132,3 +132,55 @@ export function fetchCourseContentForAdmin(query){
 
     return courseContentData
 }
+
+//FETCH ALL ORGANIZATIONS
+export function fetchAllOrganization(query){
+    const [ organizationData, setOrganizationData ] = useState({ isFetchingOrganization: true, organizationData: null, organizationDatastatus: null, organizationServerError: null, })
+    
+    useEffect(() => {
+        const fetchOrganizationData = async () => {
+            try {
+                const { data, status} = !query ? await axios.get(`/organization/getAllOrganizations`, {withCredentials: true}) : await axios.get(`/organization/getOrganization/${query}`, {withCredentials: true})
+                //console.log('Data from Hooks>>>', data, 'STATUS', status)
+
+                if(status === 200){
+                    setOrganizationData({ isFetchingOrganization: false, organizationData: data, organizationDatastatus: status, organizationServerError: null})
+                } else{
+                    setOrganizationData({ isFetchingOrganization: false, organizationData: null, organizationDatastatus: status, organizationServerError: null})
+                }
+            } catch (error) {
+                console.log('object', error)
+                setOrganizationData({ isFetchingOrganization: false, organizationData: null, organizationDatastatus: null, organizationServerError: error})
+            }
+        }
+        fetchOrganizationData()
+    }, [query])
+
+    return organizationData
+}
+
+//FETCH ALL COURSES
+export function fetchAllCourse(query){
+    const [ coursesData, setCoursesData ] = useState({ isFetchingData: true, coursesData: null, coursesStatus: null, coursesServerError: null, })
+    
+    useEffect(() => {
+        const fetchCoursesData = async () => {
+            try {
+                const { data, status} = !query ? await axios.get(`/course/getAllCourseAdmin`, {withCredentials: true}) : await axios.get(`/course/getACourseAdmin/${query}`, {withCredentials: true})
+                //console.log('Data from Hooks>>>', data, 'STATUS', status)
+
+                if(status === 200){
+                    setCoursesData({ isFetchingData: false, coursesData: data, coursesStatus: status, coursesServerError: null})
+                } else{
+                    setCoursesData({ isFetchingData: false, coursesData: null, coursesStatus: status, coursesServerError: null})
+                }
+            } catch (error) {
+                console.log('object', error)
+                setCoursesData({ isFetchingData: false, coursesData: null, coursesStatus: null, coursesServerError: error})
+            }
+        }
+        fetchCoursesData()
+    }, [query])
+
+    return coursesData
+}

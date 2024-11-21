@@ -17,7 +17,7 @@ function Navbar() {
 
 
     return (
-        <div className="relative h-[60px] py-1 w-full flex bg-white border-b-[1px] border-b-[#D9DBE9]">
+        <div className="relative h-[60px] py-1 px-4 w-full flex bg-white border-b-[1px] border-b-[#D9DBE9]">
             <div className="ml-auto flex items-center gap-2">
                 <img src={ProfileImg} alt="profile" className="w-[34px] h-[34px] rounded-full" />
 

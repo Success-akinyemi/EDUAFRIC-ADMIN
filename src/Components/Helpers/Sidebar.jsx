@@ -57,7 +57,7 @@ function Sidebar() {
 
       </div>
 
-      <div onClick={handleSignout} className="mt-auto flex items-center gap-[21px] justify-center h-[86px] border-t-[1px] border-t-[#D9DBE9] text-[16px] hover:text-error cursor-pointer">
+      <div onClick={handleSignout} className="mt-auto flex items-center gap-[21px] px-[18px]  h-[86px] border-t-[1px] border-t-[#D9DBE9] text-[16px] hover:text-error cursor-pointer">
         <LuLogOut className="text-[24px]" />
         { isLoading ? 'Logging out...' :  'Logout'}
       </div>

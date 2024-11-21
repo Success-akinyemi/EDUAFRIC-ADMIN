@@ -8,7 +8,7 @@ import { FiMoreVertical } from "react-icons/fi";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { MdOutlineDeleteOutline } from "react-icons/md";
 import { Link } from "react-router-dom";
-import { blackListInstructor, blackListStudent } from "../../Helpers/apis";
+import { blackListOrganization } from "../../Helpers/apis";
 import toast from "react-hot-toast";
 
 function DataTable({ data, loading, timeDate, setTimeDate }) {
@@ -20,7 +20,7 @@ function DataTable({ data, loading, timeDate, setTimeDate }) {
   // Filter students based on the search term (instructorID or email)
   const filteredData = instructorData.filter(
     (instructor) =>
-      instructor?.instructorID?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      instructor?.organisationID?.toLowerCase().includes(searchTerm.toLowerCase()) ||
       instructor?.email?.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
@@ -110,10 +110,10 @@ function DataTable({ data, loading, timeDate, setTimeDate }) {
 
     //TOGGLE BLACKLIST
     const [ blacklisting, setBlacklisting ] = useState(false)
-    const handleBlacklsitStudent = async (value) => {
+    const handleBlacklistOrganization = async (value) => {
       try {
         setBlacklisting(true)
-        const res = await blackListInstructor({ id: value })
+        const res = await blackListOrganization({ id: value })
         if(res.success){
           toast.success(res.data)
           window.location.reload()
@@ -166,13 +166,13 @@ function DataTable({ data, loading, timeDate, setTimeDate }) {
             <thead>
               <tr className="bg-[#F9F9F9] rounded-t-[12px]">
                 <th className="px-6 py-3 text-left text-gray-600 font-medium text-[12px] tracking-wider">
-                  Instructor Name
+                  Organization Name
                 </th>
                 <th className="px-6 py-3 text-left text-gray-600 font-medium text-[12px] tracking-wider">
                   Display Name
                 </th>
                 <th className="px-6 py-3 text-left text-gray-600 font-medium text-[12px] tracking-wider">
-                    Instructor ID
+                    Organization ID
                 </th>
                 <th className="px-6 py-3 text-left text-gray-600 font-medium text-[12px] tracking-wider">
                   Email Address
@@ -199,7 +199,7 @@ function DataTable({ data, loading, timeDate, setTimeDate }) {
                       {student?.displayName}
                     </td>
                     <td className="px-6 py-4 text-[14px] font-normal text-[#13693B]">
-                      {student?.instructorID}
+                      {student?.organisationID}
                     </td>
                     <td className="px-6 py-4 text-[14px] text-[#121212] font-normal">
                       {student?.email}
@@ -237,7 +237,7 @@ function DataTable({ data, loading, timeDate, setTimeDate }) {
                         {/* MODAL POPUP, visible only on hover */}
                         <div className="absolute z-50 top-8 flex flex-col gap-3 bg-white border-[1px] border-gray-200 shadow-lg rounded-[8px] p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 w-[170px]">
                           <Link
-                            to={`/instructor/${student._id}`}
+                            to={`/organizations/${student._id}`}
                             className="flex items-center gap-3 text-sm text-primary-color"
                           >
                             <MdOutlineRemoveRedEye />
@@ -245,7 +245,7 @@ function DataTable({ data, loading, timeDate, setTimeDate }) {
                           </Link>
                           <button
                             className="flex items-center gap-3 text-sm text-[#D34B56]"
-                            onClick={() => handleBlacklsitStudent(student._id)}
+                            onClick={() => handleBlacklistOrganization(student._id)}
                           >
                             <MdOutlineDeleteOutline />
                             { student?.blocked ? 'Account BLocked' : blacklisting ? 'Blacklisting...' : 'Blacklist'}

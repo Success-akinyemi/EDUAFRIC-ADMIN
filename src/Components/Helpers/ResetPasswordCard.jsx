@@ -52,7 +52,7 @@ function ResetPasswordCard({ setErrorCard }) {
         const res = await resetPassword(formData)
         if(res.success){
           toast.success(res.data)
-          navigate('/')
+          navigate('/success')
         } else {
           setErrorCard(`${res.data}`)
           setTimeout(() => {
@@ -70,9 +70,11 @@ function ResetPasswordCard({ setErrorCard }) {
       <div className="w-[574px] flex flex-col gap-16">
         {/**INTRO */}
         <div className="flex flex-col gap-[10px]">
-          <h3 className="text-text-color-1 text-[30px] font-bold">Welcome to EduAfrica</h3>
+          <h3 className="text-text-color-1 text-[30px] font-bold">Please reset your password</h3>
   
-          <p className="text-[16px] font-normal text-text-color-2">Sign in with Staff ID or Email Address</p>
+          <p className="text-[16px] font-normal text-text-color-2">
+            Kindly enter a new password for your account. You will be able to login with this password.
+          </p>
         </div>
   
         {/**BODY */}
@@ -97,6 +99,7 @@ function ResetPasswordCard({ setErrorCard }) {
               </span>
             </div>
             <p className="font-medium text-error text-[13px]">{confirmPasswordError}</p>
+            <p className="text-sm font-medium text-gray-600 text-[14px]">Must be at least 6 characters.</p>
           </div>
         </div>
   

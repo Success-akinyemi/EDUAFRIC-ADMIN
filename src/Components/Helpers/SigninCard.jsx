@@ -5,6 +5,7 @@ import LoadingBtn from "./LoadingBtn"
 import { Link, useNavigate } from "react-router-dom"
 import { useDispatch } from "react-redux"
 import { signInSuccess } from "../../Redux/User/adminSlice"
+import toast from "react-hot-toast"
 
 function SigninCard({ setErrorCard }) {
   const navigate = useNavigate()
@@ -45,6 +46,10 @@ function SigninCard({ setErrorCard }) {
       setLoading(true)
 
       const res = await signin(formData)
+      if(res.isVerified === false && res.success === false){
+        toast.error(res.data)
+        navigate('/verify-otp')
+      }
       if(res.success){
         localStorage.setItem('edtechafricauth', res.token)
         dispatch(signInSuccess(res?.data))
@@ -69,7 +74,7 @@ function SigninCard({ setErrorCard }) {
       <div className="flex flex-col gap-[10px]">
         <h3 className="text-text-color-1 text-[30px] font-bold">Welcome to EduAfrica</h3>
 
-        <p className="text-[16px] font-normal text-text-color-2">Sign in with Staff ID or Email Address</p>
+        <p className=" text-[16px] font-normal text-text-color-2">Sign in with Staff ID or Email Address</p>
       </div>
 
       {/**BODY */}
@@ -88,18 +93,23 @@ function SigninCard({ setErrorCard }) {
             </span>
           </div>
           <p className="font-medium text-error text-[13px]">{authError}</p>
-          <Link to={`/forgot-password`} className="font-medium text-error text-[13px]">Forgot password</Link>
+          <Link to={`/forgot-password`} className="text-sm font-normal text-error text-[14px]">Forgot password</Link>
         </div>
       </div>
 
       {/**BUTTON */}
       {
         loading ? (
-          <LoadingBtn />
+          <div className="full">
+            <LoadingBtn style={`w-full`} />
+          </div>
         ) : (
           <Button disabled={loading} onCLick={handleSignin} text={'Sign in'} />
         )
       }
+
+
+      <Link to={`/signup`} className="text-xs font-semibold text-[#4B5565]">You don’t have an account? <span className="font-bold text-primary-color">Become an EduAfrica Amin</span></Link>
 
     </div>
   )

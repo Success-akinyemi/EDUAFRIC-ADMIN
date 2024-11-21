@@ -12,7 +12,7 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { approveCourse, rejectCourse } from "../../Helpers/apis";
 
-function CourseInfo({ setSelectedCard }) {
+function OrganizationCourseInfo({ setSelectedCard }) {
   const navigate = useNavigate();
   const loc = useLocation();
   const pathName = loc.pathname.split("/")[2];
@@ -304,7 +304,7 @@ function CourseInfo({ setSelectedCard }) {
                     ) : (
                       courseContent?.map((item) => (
                         <div className="flex flex-col gap-6 border-b-[1px] py-8 ">
-                          {console.log('object', courseContent)}
+                          {/**console.log('object', courseContent) */}
                           <h2 className="text-[#344054] text-[16px] font-semibold">
                             {item?.sectionTitle}
                           </h2>
@@ -403,4 +403,4 @@ function CourseInfo({ setSelectedCard }) {
   );
 }
 
-export default CourseInfo;
+export default OrganizationCourseInfo
