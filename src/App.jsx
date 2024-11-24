@@ -10,7 +10,7 @@ import Course from './Pages/Course/Course'
 import Messages from './Pages/Messages'
 import CMS from './Pages/CMS'
 import Advert from './Pages/Advert'
-import Settings from './Pages/Settings'
+import Profile from './Pages/Profile'
 import { AuthorizeAdmin } from './Auth/ProtectRoute'
 import StudentDetails from './Pages/Student/StudentDetails'
 import Chat from './Demo/Chat'
@@ -30,10 +30,13 @@ import VerifyOtp from './Pages/VerifyOtp'
 import OrganizationDetails from './Pages/Organizations/OrganizationDetails'
 import OrganizationCourseInfo from './Pages/Organizations/OrganizationCourseInfo'
 import CoursesInfo from './Pages/Course/CoursesInfo'
+import Staffs from './Pages/Staffs/Staffs'
+import Settings from './Pages/Settings'
+import UpdateCountry from './Modals/UpdateCountry'
 
 function App() {
   const [ selectedCard, setSelectedCard ] = useState(null)
-  const [ popupBg, setPopupBg ] = useState(false)
+  const [ countryId, setCountryId ] = useState()
 
   const renderPopup = () => {
     switch(selectedCard){
@@ -47,6 +50,12 @@ function App() {
         return (
           <div>
             <BlockCourseModal setSelectedCard={setSelectedCard} />
+          </div>
+        )
+      case 'updateCountry': 
+        return (
+          <div>
+            <UpdateCountry countryId={countryId} setCountryId={setCountryId} setSelectedCard={setSelectedCard} />
           </div>
         )
     }
@@ -143,7 +152,13 @@ function App() {
             <Route path='/advert' element={<Advert />} />
           </Route>
           <Route element={<AuthorizeAdmin />} >
-            <Route path='/settings' element={<Settings />} />
+            <Route path='/profile' element={<Profile />} />
+          </Route>
+          <Route element={<AuthorizeAdmin />} >
+            <Route path='/staffs' element={<Staffs />} />
+          </Route>
+          <Route element={<AuthorizeAdmin />} >
+            <Route path='/settings' element={<Settings setCountryId={setCountryId} setSelectedCard={setSelectedCard} />} />
           </Route>
 
 

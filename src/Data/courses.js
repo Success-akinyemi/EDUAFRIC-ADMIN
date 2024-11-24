@@ -39,6 +39,10 @@ export const courseList = [
         slug: 'acvtive',
     },
     {
+        name: 'Pending',
+        slug: 'pending'
+    },
+    {
         name: 'Inactive',
         slug: 'inactive'
     },

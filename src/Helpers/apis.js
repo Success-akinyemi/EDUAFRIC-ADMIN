@@ -74,6 +74,28 @@ export async function blackListStudent({ id }) {
     }
 }
 
+//EDIT ADMIN PROFILE
+export async function editProfile(formData) {
+    try {
+        const res = await axios.post('/admin/editProfile', formData, {withCredentials: true})
+        return res.data
+    } catch (error) {
+        const res = error.response || 'Unable to edit user profile'
+        return res?.data
+    }
+}
+
+//UPDATE ADMIN PASSWORD
+export async function updatePassword(formData) {
+    try {
+        const res = await axios.post('/admin/updatePassword', formData, {withCredentials: true})
+        return res.data
+    } catch (error) {
+        const res = error.response || 'Unable to update password'
+        return res?.data
+    }
+}
+
 //BLOCK AND UNBLOCK INSRTUCTOR
 export async function blackListInstructor({ id }) {
     try {
@@ -111,6 +133,50 @@ export async function rejectCourse(formData) {
 export async function blackListOrganization({ id }) {
     try {
         const res = await axios.post('/organization/toggleblock', { id }, {withCredentials: true})
+        return res.data
+    } catch (error) {
+        const res = error.response || 'Unable to perform block action on student'
+        return res?.data
+    }
+}
+
+//SITE SETTINGS
+export async function siteSetting(formData) {
+    try {
+        const res = await axios.post('/admin/siteSetting', formData, {withCredentials: true})
+        return res.data
+    } catch (error) {
+        const res = error.response || 'Unable to perform block action on student'
+        return res?.data
+    }
+}
+
+//ADD NEW COUNTRY
+export async function newCountry(formData) {
+    try {
+        const res = await axios.post('/country/newCountry', formData, {withCredentials: true})
+        return res.data
+    } catch (error) {
+        const res = error.response || 'Unable to perform block action on student'
+        return res?.data
+    }
+}
+
+//UPDATE COUNTRY
+export async function updateCountry(formData) {
+    try {
+        const res = await axios.post('/country/updateCountry', formData, {withCredentials: true})
+        return res.data
+    } catch (error) {
+        const res = error.response || 'Unable to perform block action on student'
+        return res?.data
+    }
+}
+
+//DELETE COUNTRT
+export async function deleteCountry({ id }) {
+    try {
+        const res = await axios.post('/country/deleteCountry', { id }, {withCredentials: true})
         return res.data
     } catch (error) {
         const res = error.response || 'Unable to perform block action on student'

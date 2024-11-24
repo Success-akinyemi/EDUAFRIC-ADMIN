@@ -7,6 +7,8 @@ import { MdOutlineMessage } from "react-icons/md";
 import { RiMailOpenLine } from "react-icons/ri";
 import { LuTv } from "react-icons/lu";
 import { MdOutlineSettings } from "react-icons/md";
+import { RiAccountCircleLine } from "react-icons/ri";
+import { MdPeopleAlt } from "react-icons/md";
 
 export const menuLinks = [
     {
@@ -50,8 +52,18 @@ export const menuLinks = [
         icon: LuTv
     },
     {
+        name: 'Profile',
+        link: '/profile',
+        icon: RiAccountCircleLine
+    },
+    {
         name: 'Settings',
         link: '/settings',
         icon: MdOutlineSettings
+    },
+    {
+        name: 'Staffs',
+        link: '/staffs',
+        icon: MdPeopleAlt
     }
 ]

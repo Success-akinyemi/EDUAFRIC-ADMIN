@@ -1,13 +1,12 @@
-import { courseList } from "../../Data/courses";
-import { fetchAllCourse } from "../../Helpers/fetch.api";
-import DataTable from "../InstructorsUi/DataTable";
 import { useState } from "react";
-import CourseTable from "./CourseTable";
+import { staffList } from "../../Data/staffs";
+import StaffTable from "./StaffTable";
+import { fetchStaffs } from "../../Helpers/fetch.api";
 
-function CourseList({ timeDate, setTimeDate }) {
-    const { coursesData, isFetchingData } = fetchAllCourse();
-    const dataArray = coursesData?.data || [];
-    const listData = courseList;
+function StaffList() {
+    const { isFetchingStaffsData, staffsData } = fetchStaffs();
+    const dataArray = staffsData?.data || [];
+    const listData = staffList;
     const [cardState, setCardState] = useState(listData[0]?.slug);
 
     const handleCardChange = (value) => {
@@ -18,7 +17,6 @@ function CourseList({ timeDate, setTimeDate }) {
     const filteredData = dataArray.filter((instructor) => {
         if (cardState === 'all') return true;
         if (cardState === 'active') return instructor?.approved?.toLowerCase() === 'approved';
-        if (cardState === 'pending') return instructor.approved === 'Pending';
         if (cardState === 'inactive') return instructor.approved === 'Rejected';
         if (cardState === 'blacklist') return instructor.isBlocked === true;
         return true;
@@ -47,10 +45,11 @@ function CourseList({ timeDate, setTimeDate }) {
     </div>
 
     <div className="card">
-      <CourseTable data={filteredData} loading={isFetchingData} timeDate={timeDate} setTimeDate={setTimeDate} />
+      <StaffTable data={filteredData} loading={isFetchingStaffsData}  />
     </div>
-</div>
-);
+      
+    </div>
+  )
 }
 
-export default CourseList
+export default StaffList

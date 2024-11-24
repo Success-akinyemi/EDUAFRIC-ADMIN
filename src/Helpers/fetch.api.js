@@ -184,3 +184,81 @@ export function fetchAllCourse(query){
 
     return coursesData
 }
+
+//FETCH SITE SETTINGS
+export function fetchSiteSettings(query){
+    const [ siteSetting, setSiteSettings ] = useState({ isFetchingData: true, siteSettingsData: null, siteSettingStatus: null, siteSettingServerError: null, })
+    
+    useEffect(() => {
+        const fetchSiteSettingsData = async () => {
+            try {
+                const { data, status} = !query ? await axios.get(`/admin/getSiteSettings`, {withCredentials: true}) : await axios.get(`/admin/getSiteSettings/${query}`, {withCredentials: true})
+                //console.log('Data from Hooks>>>', data, 'STATUS', status)
+
+                if(status === 200){
+                    setSiteSettings({ isFetchingData: false, siteSettingsData: data, siteSettingStatus: status, siteSettingServerError: null})
+                } else{
+                    setSiteSettings({ isFetchingData: false, siteSettingsData: null, siteSettingStatus: status, siteSettingServerError: null})
+                }
+            } catch (error) {
+                console.log('object', error)
+                setSiteSettings({ isFetchingData: false, siteSettingsData: null, siteSettingStatus: null, siteSettingServerError: error})
+            }
+        }
+        fetchSiteSettingsData()
+    }, [query])
+
+    return siteSetting
+}
+
+//FETCH COUNTRIES
+export function fetchCountries(query){
+    const [ countriesData, setCountriesData ] = useState({ isFetchingData: true, countriesData: null, countriesStatus: null, countriesServerError: null, })
+    
+    useEffect(() => {
+        const fectchCountriesData = async () => {
+            try {
+                const { data, status} = !query ? await axios.get(`/country/getCountries`, {withCredentials: true}) : await axios.get(`/country/getCountry/${query}`, {withCredentials: true})
+                //console.log('Data from Hooks>>>', data, 'STATUS', status)
+
+                if(status === 200){
+                    setCountriesData({ isFetchingData: false, countriesData: data, countriesStatus: status, countriesServerError: null})
+                } else{
+                    setCountriesData({ isFetchingData: false, countriesData: null, countriesStatus: status, countriesServerError: null})
+                }
+            } catch (error) {
+                console.log('object', error)
+                setCountriesData({ isFetchingData: false, countriesData: null, countriesStatus: null, countriesServerError: error})
+            }
+        }
+        fectchCountriesData()
+    }, [query])
+
+    return countriesData
+}
+
+//FETCH STAFFS
+export function fetchStaffs(query){
+    const [ staffsData, setStaffsData ] = useState({ isFetchingStaffsData: true, staffsData: null, staffsStatus: null, staffsError: null, })
+    
+    useEffect(() => {
+        const fetchStaffsData = async () => {
+            try {
+                const { data, status} = !query ? await axios.get(`/country/getCountries`, {withCredentials: true}) : await axios.get(`/country/getCountry/${query}`, {withCredentials: true})
+                //console.log('Data from Hooks>>>', data, 'STATUS', status)
+
+                if(status === 200){
+                    setStaffsData({ isFetchingStaffsData: false, staffsData: data, staffsStatus: status, staffsError: null})
+                } else{
+                    setStaffsData({ isFetchingStaffsData: false, staffsData: null, staffsStatus: status, staffsError: null})
+                }
+            } catch (error) {
+                console.log('object', error)
+                setStaffsData({ isFetchingStaffsData: false, staffsData: null, staffsStatus: null, staffsError: error})
+            }
+        }
+        fetchStaffsData()
+    }, [query])
+
+    return staffsData
+}

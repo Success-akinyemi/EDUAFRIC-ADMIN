@@ -9,7 +9,7 @@ import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { MdOutlineDeleteOutline } from "react-icons/md";
 import { Link } from "react-router-dom";
 
-function CourseTable({ data, loading, timeDate, setTimeDate }) {
+function StaffTable({ data, loading }) {
     const [currentPage, setCurrentPage] = useState(1);
     const [searchTerm, setSearchTerm] = useState(""); // State for search input
     const studentData = data || [];
@@ -110,7 +110,7 @@ function CourseTable({ data, loading, timeDate, setTimeDate }) {
       <div className="flex w-full items-center justify-between">
         <div className="flex items-center gap-[50px]">
           <h3 className="text-lg font-semibold text-[#121212]">
-            {filteredData.length} Courses
+            {filteredData.length} Staffs
           </h3>
           <div className="flex items-center w-[400px] bg-white gap-[6px]">
             <CiSearch className="text-[28px] cursor-pointer" />
@@ -127,11 +127,6 @@ function CourseTable({ data, loading, timeDate, setTimeDate }) {
           </div>
         </div>
 
-        <div>
-          <div className="w-full flex">
-            <DateFilter setTimeDate={setTimeDate} timeDate={timeDate} />
-          </div>
-        </div>
       </div>
 
       <div>
@@ -253,4 +248,5 @@ function CourseTable({ data, loading, timeDate, setTimeDate }) {
   )
 }
 
-export default CourseTable
+
+export default StaffTable
