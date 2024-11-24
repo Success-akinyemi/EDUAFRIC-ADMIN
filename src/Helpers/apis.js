@@ -28,6 +28,7 @@ export async function signin(formData) {
         const res = await axios.post('/admin/login', formData, {withCredentials: true})
         return res.data
     } catch (error) {
+        console.log('ERRORO',error)
         const res = error.response || 'Unable to login user'
         return res?.data
     }
