@@ -56,7 +56,7 @@ function AddCouponCode({ setSelectedCard }) {
 
             <div className="inputGroup">
                 <label className="label">Max Number of Student</label>
-                <input type="text" id="maxNumber" className="input" placeholder="1000" />
+                <input type="text" id="maxNumber" onChange={handleChange} className="input" placeholder="1000" />
             </div>
 
         </div>
