@@ -392,3 +392,29 @@ export function fetchCourseStats(query){
 
     return courseStats
 }
+
+//FETCH COUPON CODE
+export function fetchCouponCodes(query){
+    const [ couponCodeData, setCouponCodeData ] = useState({ isFetching: true, couponCodeData: null, couponCodeStatus: null, couponCodeError: null, })
+    
+    useEffect(() => {
+        const fetchCouponCode = async () => {
+            try {
+                const { data, status} = !query ? await axios.get(`/course/getCourseStats/${query}`, {withCredentials: true}) : await axios.get(`/course/getCourseStats/${query}`, {withCredentials: true})
+                //console.log('Data from Hooks>>>', data, 'STATUS', status)
+
+                if(status === 200){
+                    setCouponCodeData({ isFetching: false, couponCodeData: data, couponCodeStatus: status, couponCodeError: null})
+                } else{
+                    setCouponCodeData({ isFetching: false, couponCodeData: null, couponCodeStatus: status, couponCodeError: null})
+                }
+            } catch (error) {
+                console.log('object', error)
+                setCouponCodeData({ isFetching: false, couponCodeData: null, couponCodeStatus: null, couponCodeError: error})
+            }
+        }
+        fetchCouponCode()
+    }, [query])
+
+    return couponCodeData
+}

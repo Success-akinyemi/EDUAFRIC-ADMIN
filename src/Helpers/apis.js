@@ -277,3 +277,15 @@ export async function deleteCms({ id }) {
         return res?.data
     }
 }
+
+//CREATE COUPON
+export async function createCoupon(formData) {
+    try {
+        const res = await axios.post('/coupon/createCoupon', formData, {withCredentials: true})
+        return res.data
+    } catch (error) {
+        console.log('objectddd', error)
+        const res = error.response || 'Unable to create coupon data'
+        return res?.data
+    }
+}

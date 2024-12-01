@@ -87,7 +87,7 @@ function App() {
       case 'addCouponCode':
         return (
           <div>
-            <AddCouponCode />
+            <AddCouponCode setSelectedCard={setSelectedCard} />
           </div>
         )
     }
