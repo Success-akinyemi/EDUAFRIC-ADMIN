@@ -21,7 +21,7 @@ function Course() {
               <h2 className="text-off-black text-[30px] font-semibold" >Course</h2>
 
               <div className="mt-8 mb-[30px]">
-                <Stats />
+                <Stats timeDate={timeDate} setTimeDate={setTimeDate} />
               </div>
             </div>
     

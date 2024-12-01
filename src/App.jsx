@@ -8,7 +8,7 @@ import Instructors from './Pages/Instructors/Instructors'
 import Organizations from './Pages/Organizations/Organizations'
 import Course from './Pages/Course/Course'
 import Messages from './Pages/Messages'
-import CMS from './Pages/CMS'
+import CMS from './Pages/CMS/CMS'
 import Advert from './Pages/Advert'
 import Profile from './Pages/Profile'
 import { AuthorizeAdmin } from './Auth/ProtectRoute'
@@ -33,10 +33,18 @@ import CoursesInfo from './Pages/Course/CoursesInfo'
 import Staffs from './Pages/Staffs/Staffs'
 import Settings from './Pages/Settings'
 import UpdateCountry from './Modals/UpdateCountry'
+import StaffInfo from './Pages/Staffs/StaffInfo'
+import ApproveAdmin from './Modals/ApproveAdmin'
+import EditStaff from './Modals/EditStaff'
+import EditCMS from './Pages/CMS/EditCMS'
+import DeleteCms from './Modals/DeleteCms'
+import AddCouponCode from './Modals/AddCouponCode'
 
 function App() {
   const [ selectedCard, setSelectedCard ] = useState(null)
   const [ countryId, setCountryId ] = useState()
+  const [ adminStaffId, setAdminStaffId ] = useState()
+  const [ cmsId, setCmsId ] = useState()
 
   const renderPopup = () => {
     switch(selectedCard){
@@ -56,6 +64,30 @@ function App() {
         return (
           <div>
             <UpdateCountry countryId={countryId} setCountryId={setCountryId} setSelectedCard={setSelectedCard} />
+          </div>
+        )
+      case 'approveAdmin':
+        return (
+          <div>
+            <ApproveAdmin setAdminStaffId={setAdminStaffId} adminStaffId={adminStaffId} setSelectedCard={setSelectedCard} />
+          </div>
+        )
+      case 'editStaff': 
+        return (
+          <div>
+            <EditStaff setAdminStaffId={setAdminStaffId} adminStaffId={adminStaffId} setSelectedCard={setSelectedCard} />
+          </div>
+        )
+      case 'deleteCms':
+        return (
+          <div>
+            <DeleteCms cmsId={cmsId} setCmsId={setCmsId} setSelectedCard={setSelectedCard} />
+          </div>
+        )
+      case 'addCouponCode':
+        return (
+          <div>
+            <AddCouponCode />
           </div>
         )
     }
@@ -146,7 +178,10 @@ function App() {
             <Route path='/messages' element={<Messages />} />
           </Route>
           <Route element={<AuthorizeAdmin />} >
-            <Route path='/cms' element={<CMS />} />
+            <Route path='/cms' element={<CMS setSelectedCard={setSelectedCard} setCmsId={setCmsId} />} />
+          </Route>
+          <Route element={<AuthorizeAdmin />} >
+            <Route path='/edit-cms/:id' element={<EditCMS />} />
           </Route>
           <Route element={<AuthorizeAdmin />} >
             <Route path='/advert' element={<Advert />} />
@@ -155,7 +190,10 @@ function App() {
             <Route path='/profile' element={<Profile />} />
           </Route>
           <Route element={<AuthorizeAdmin />} >
-            <Route path='/staffs' element={<Staffs />} />
+            <Route path='/staffs' element={<Staffs setSelectedCard={setSelectedCard} setAdminStaffId={setAdminStaffId} />} />
+          </Route>
+          <Route element={<AuthorizeAdmin />} >
+            <Route path='/staff-info/:id' element={<StaffInfo setSelectedCard={setSelectedCard} setAdminStaffId={setAdminStaffId} />} />
           </Route>
           <Route element={<AuthorizeAdmin />} >
             <Route path='/settings' element={<Settings setCountryId={setCountryId} setSelectedCard={setSelectedCard} />} />

@@ -184,3 +184,96 @@ export async function deleteCountry({ id }) {
         return res?.data
     }
 }
+
+//BLOCK ADMIN STAFF ACCOUNT
+export async function blockAccount({ _id }) {
+    try {
+        const res = await axios.post('/admin/blockAccount', { _id }, {withCredentials: true})
+        return res.data
+    } catch (error) {
+        const res = error.response || 'Unable to perform block action on student'
+        return res?.data
+    }
+}
+
+//UNBLOACK ADMIN STAFF ACCOUNT
+export async function unBlockAccount({ _id }) {
+    try {
+        const res = await axios.post('/admin/unBlockAccount', { _id }, {withCredentials: true})
+        return res.data
+    } catch (error) {
+        const res = error.response || 'Unable to perform block action on student'
+        return res?.data
+    }
+}
+
+//APPROVE ADMIN STAFF ACCOUNT
+export async function approveAdmin(formData) {
+    try {
+        const res = await axios.post('/admin/approveAdmin', formData, {withCredentials: true})
+        return res.data
+    } catch (error) {
+        console.log('object error', error)
+        const res = error.response || 'Unable to perform approval action on staff'
+        return res?.data
+    }
+}
+
+//EDIT ADMIN STAFF ACCOUNT
+export async function adminEditStaff(formData) {
+    try {
+        const res = await axios.post('/admin/adminEditStaff', formData, {withCredentials: true})
+        return res.data
+    } catch (error) {
+        console.log('object error', error)
+        const res = error.response || 'Unable to perform approval action on staff'
+        return res?.data
+    }
+}
+
+//DELETE ADMIN STAFF ACCOUNT
+export async function deleteAccount({ _id }) {
+    try {
+        const res = await axios.post('/admin/deleteAccount', { _id }, {withCredentials: true})
+        return res.data
+    } catch (error) {
+        const res = error.response || 'Unable to delete staff account'
+        return res?.data
+    }
+}
+
+//ADD NEW CMS
+export async function newCms(formData) {
+    try {
+        const res = await axios.post('/cms/newCms', formData, {withCredentials: true})
+        return res.data
+    } catch (error) {
+        console.log('objectddd', error)
+        const res = error.response || 'Unable to create cms data'
+        return res?.data
+    }
+}
+
+//UPDATE CMS
+export async function updateCms(formData) {
+    try {
+        const res = await axios.post('/cms/updateCms', formData, {withCredentials: true})
+        return res.data
+    } catch (error) {
+        console.log('objectddd', error)
+        const res = error.response || 'Unable to update cms data'
+        return res?.data
+    }
+}
+
+//DELETE CMS
+export async function deleteCms({ id }) {
+    try {
+        const res = await axios.post('/cms/deleteCms', { id }, {withCredentials: true})
+        return res.data
+    } catch (error) {
+        console.log('objectddd', error)
+        const res = error.response || 'Unable to delete cms data'
+        return res?.data
+    }
+}

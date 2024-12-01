@@ -20,7 +20,7 @@ function Students() {
               <h2 className="text-off-black text-[30px] font-semibold" >Students</h2>
 
               <div className="mt-8 mb-[30px]">
-                <Stats />
+                <Stats timeDate={timeDate} setTimeDate={setTimeDate} />
               </div>
 
               <StudentList timeDate={timeDate} setTimeDate={setTimeDate} />

@@ -8,8 +8,12 @@ import { FiMoreVertical } from "react-icons/fi";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { MdOutlineDeleteOutline } from "react-icons/md";
 import { Link } from "react-router-dom";
+import { MdDeleteOutline } from "react-icons/md";
+import { deleteAccount } from "../../Helpers/apis";
+import toast from "react-hot-toast";
+import { BiEditAlt } from "react-icons/bi";
 
-function StaffTable({ data, loading }) {
+function StaffTable({ data, loading, setSelectedCard, setAdminStaffId }) {
     const [currentPage, setCurrentPage] = useState(1);
     const [searchTerm, setSearchTerm] = useState(""); // State for search input
     const studentData = data || [];
@@ -18,8 +22,8 @@ function StaffTable({ data, loading }) {
     // Filter students based on the search term (studentID or email)
     const filteredData = studentData.filter(
       (student) =>
-        student?.slugCode?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        student?.title?.toLowerCase().includes(searchTerm.toLowerCase())
+        student?.staffID?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        student?.email?.toLowerCase().includes(searchTerm.toLowerCase())
     );
   
     // Calculate the total number of pages for filtered data
@@ -104,6 +108,38 @@ function StaffTable({ data, loading }) {
         );
       }
     };
+    
+    const [ deleting, setDeleting ] = useState(false)
+    const handleDeleteStaffAccount = async (id, name) => {
+      if(deleting){
+        return
+      }
+      if(!id){
+        toast.error('Staff ID is required')
+      }
+      const confirm = window.confirm(`Are you sure you want to delete staff account. Name: ${name}`)
+      if(confirm){
+        try {
+          setDeleting(true)
+          const res = await deleteAccount({ _id: id })
+          if(res.success){
+            toast.success(res.data)
+            window.location.reload()
+          } else {
+            toast.error(res.data)
+          }
+        } catch {
+    
+        } finally {
+          setDeleting(false)
+        }
+      }
+    };
+
+    const handleEditStaff = (id) => {
+      setAdminStaffId(id)
+      setSelectedCard('editStaff')
+    }
 
   return (
     <div className="flex flex-col p-4 gap-[30px] bg-white border-[1px] border-white shadow-sm rounded-t-[12px]">
@@ -112,11 +148,11 @@ function StaffTable({ data, loading }) {
           <h3 className="text-lg font-semibold text-[#121212]">
             {filteredData.length} Staffs
           </h3>
-          <div className="flex items-center w-[400px] bg-white gap-[6px]">
-            <CiSearch className="text-[28px] cursor-pointer" />
+          <div className="flex items-center w-[400px] bg-white gap-[6px] rounded-[8px] border-[1px] py-[10px] px-[14px]">
+            <CiSearch className="text-[21px]" />
             <input
               type="text"
-              className="input"
+              className="input border-none p-0"
               placeholder="Search by Course ID or Title"
               value={searchTerm}
               onChange={(e) => {
@@ -139,16 +175,16 @@ function StaffTable({ data, loading }) {
             <thead>
               <tr className="bg-[#F9F9F9] rounded-t-[12px]">
                 <th className="px-6 py-3 text-left text-gray-600 font-medium text-[12px]">
-                  Course Title
+                  Name
                 </th>
                 <th className="px-6 py-3 text-left text-gray-600 font-medium text-[12px]">
-                  Category
+                  Email
                 </th>
                 <th className="px-6 py-3 text-left text-gray-600 font-medium text-[12px]">
-                  Course ID
+                  Role
                 </th>
                 <th className="px-6 py-3 text-left text-gray-600 font-medium text-[12px]">
-                  Amount
+                  ID
                 </th>
                 <th className="px-6 py-3 text-left text-gray-600 font-medium text-[12px]">
                   Date & Time
@@ -166,16 +202,16 @@ function StaffTable({ data, loading }) {
                 return (
                   <tr key={order?._id}>
                     <td className="px-6 py-4 text-[13px] text-[#121212] font-normal">
-                      {order?.title}
+                      {order?.firstName} {order?.lastName}
                     </td>
                     <td className="px-6 py-4 text-[13px] text-[#121212] font-normal">
-                      {order?.category[0]}
+                      {order?.email}
                     </td>
                     <td className="px-6 py-4 text-[13px] font-normal text-[#13693B]">
-                      {order?.slugCode}
+                      {order?.role}
                     </td>
                     <td className="px-6 py-4 text-[13px] text-[#121212] font-normal">
-                      {order?.price?.toLocaleString()}
+                      {order?.staffID}
                     </td>
                     <td className="px-6 text-center py-4 text-[13px] text-[#121212] font-normal">
                       <p className="text-[13px] font-normal text-[#121212]">
@@ -189,16 +225,16 @@ function StaffTable({ data, loading }) {
                       <div className="relative cursor-pointer flex items-center justify-center gap-2 group">
                         <div
                             className={`py-[5px] px-[10px] rounded-[100px] ${
-                                order?.isBlocked === true
+                                order?.blocked === true
                                 ? "bg-[#FEF3F2] text-error"// Pending style
-                                : order?.approved === 'Approved'
+                                : order?.approved === true
                                 ? "bg-[#05A75312] text-primary-color" // Successful style
-                                : order?.approved === 'Rejected'
-                                ? "bg-[#FEF3F2] text-error"
-                                : "bg-[#D8E0E5] text-[#585858]" // Inactive or other status style
+                                : order?.approved === false
+                                ? "bg-[#D8E0E5] text-[#585858]"
+                                : "bg-[#FEF3F2] text-error" // Inactive or other status style
                             }`}
                         >
-                            {order?.isBlocked ? 'Blacklisted' : order?.approved }
+                            {order?.approved ? 'Active' : !order?.approved ? 'Pending' : order?.blocked ? 'Blocked' : '' }
                         </div>
 
                         <div>
@@ -206,14 +242,26 @@ function StaffTable({ data, loading }) {
                         </div>
 
                         {/* MODAL POPUP, visible only on hover */}
-                        <div className="absolute z-50 top-8 flex flex-col gap-3 bg-white border-[1px] border-gray-200 shadow-lg rounded-[8px] p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 w-[170px]">
+                        <div className="absolute z-50 top-8 flex flex-col gap-3 bg-white border-[1px] border-gray-200 shadow-lg rounded-[8px] p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 w-[150px]">
                           <Link
-                            to={`/course-info/${order?._id}`}
-                            className="flex items-center gap-3 text-sm text-primary-color"
+                            to={`/staff-info/${order?._id}`}
+                            className="flex items-center gap-3 text-sm"
                           >
                             <MdOutlineRemoveRedEye />
                             View
                           </Link>
+                          <div
+                            className="flex items-center gap-3 text-sm"
+                            onClick={ () => handleEditStaff(order?._id)}
+                          >
+                            <BiEditAlt />
+                            Edit
+                          </div>
+                          <div onClick={() => handleDeleteStaffAccount(order?._id, `${order?.firstName} ${order?.lastName}`)} className="flex items-center gap-3 text-sm text-error">
+                            <MdDeleteOutline />
+                            {
+                              deleting ? 'Deleting...' : 'Delete'}
+                          </div>
                         </div>
                       </div>
                     </td>

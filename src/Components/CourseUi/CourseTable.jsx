@@ -112,11 +112,11 @@ function CourseTable({ data, loading, timeDate, setTimeDate }) {
           <h3 className="text-lg font-semibold text-[#121212]">
             {filteredData.length} Courses
           </h3>
-          <div className="flex items-center w-[400px] bg-white gap-[6px]">
-            <CiSearch className="text-[28px] cursor-pointer" />
+          <div className="flex items-center w-[400px] bg-white gap-[6px] rounded-[8px] border-[1px] py-[10px] px-[14px]">
+            <CiSearch className="text-[21px]" />
             <input
               type="text"
-              className="input"
+              className="input border-none p-0"
               placeholder="Search by Course ID or Title"
               value={searchTerm}
               onChange={(e) => {

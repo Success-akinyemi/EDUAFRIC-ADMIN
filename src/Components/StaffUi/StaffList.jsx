@@ -3,9 +3,10 @@ import { staffList } from "../../Data/staffs";
 import StaffTable from "./StaffTable";
 import { fetchStaffs } from "../../Helpers/fetch.api";
 
-function StaffList() {
+function StaffList({ setSelectedCard, setAdminStaffId }) {
     const { isFetchingStaffsData, staffsData } = fetchStaffs();
     const dataArray = staffsData?.data || [];
+    //console.log('STAFFS', dataArray)
     const listData = staffList;
     const [cardState, setCardState] = useState(listData[0]?.slug);
 
@@ -16,9 +17,9 @@ function StaffList() {
     // Filter instructor data based on the selected cardState
     const filteredData = dataArray.filter((instructor) => {
         if (cardState === 'all') return true;
-        if (cardState === 'active') return instructor?.approved?.toLowerCase() === 'approved';
-        if (cardState === 'inactive') return instructor.approved === 'Rejected';
-        if (cardState === 'blacklist') return instructor.isBlocked === true;
+        if (cardState === 'active') return instructor?.approved?.toLowerCase() === true;
+        if (cardState === 'inactive') return instructor.approved === false;
+        if (cardState === 'blacklist') return instructor.blocked === true;
         return true;
     });
 
@@ -45,7 +46,7 @@ function StaffList() {
     </div>
 
     <div className="card">
-      <StaffTable data={filteredData} loading={isFetchingStaffsData}  />
+      <StaffTable data={filteredData} loading={isFetchingStaffsData} setSelectedCard={setSelectedCard} setAdminStaffId={setAdminStaffId}  />
     </div>
       
     </div>

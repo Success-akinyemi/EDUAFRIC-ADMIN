@@ -102,12 +102,12 @@ function TopCourse() {
     <div className="flex flex-col gap-6">
       {/* Search and Filter Bar */}
       <div className="flex items-center">
-        <div className="flex items-center w-[400px] bg-white gap-[6px]">
-          <CiSearch />
+        <div className="flex items-center w-[400px] bg-white gap-[6px] rounded-[8px] border-[1px] py-[10px] px-[14px]">
+          <CiSearch className="text-[21px]" />
           <input
             type="text"
-            className="input"
-            placeholder="Search for course"
+            className="input border-none p-0"
+            placeholder="Search"
           />
         </div>
 

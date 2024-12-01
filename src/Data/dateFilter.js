@@ -5,11 +5,11 @@ export const dateFilter = [
     },
     {
         name: 'Last 7 days',
-        value: 'last7days'
+        value: '7days'
     },
     {
         name: 'Last 30 days',
-        value: 'last30days'
+        value: '30days'
     },
     {
         name: '1 year',

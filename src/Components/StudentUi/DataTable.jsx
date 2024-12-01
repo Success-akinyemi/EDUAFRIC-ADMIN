@@ -133,11 +133,11 @@ function DataTable({ data, loading, timeDate, setTimeDate }) {
           <h3 className="text-lg font-semibold text-[#121212]">
             {filteredData.length} Students
           </h3>
-          <div className="flex items-center w-[400px] bg-white gap-[6px]">
-            <CiSearch className="text-[28px] cursor-pointer" />
+          <div className="flex items-center w-[400px] bg-white gap-[6px] rounded-[8px] border-[1px] py-[10px] px-[14px]">
+            <CiSearch className="text-[21px] cursor-pointer" />
             <input
               type="text"
-              className="input"
+              className="input border-none p-0"
               placeholder="Search by ID or Email"
               value={searchTerm}
               onChange={(e) => {
@@ -261,18 +261,20 @@ function DataTable({ data, loading, timeDate, setTimeDate }) {
       </div>
 
       <div className="w-full flex justify-center items-center pt-[30px]">
-        <div className="flex gap-[8px] items-center">
+        <div className="flex w-full gap-[8px] items-center justify-between">
           <button
             onClick={handlePreviousPage}
-            className="px-3 py-1 border rounded bg-white"
+            className="px-3 py-1 border rounded bg-white flex gap-[8px] items-center justify-center"
           >
             <FaArrowLeft />
+            Previous
           </button>
           {renderPagination()}
           <button
             onClick={handleNextPage}
-            className="px-3 py-1 border rounded bg-white"
+            className="px-3 py-1 border rounded bg-white flex gap-[8px] items-center justify-center"
           >
+            Next
             <FaArrowRight />
           </button>
         </div>

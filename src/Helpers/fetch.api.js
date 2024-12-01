@@ -244,7 +244,7 @@ export function fetchStaffs(query){
     useEffect(() => {
         const fetchStaffsData = async () => {
             try {
-                const { data, status} = !query ? await axios.get(`/country/getCountries`, {withCredentials: true}) : await axios.get(`/country/getCountry/${query}`, {withCredentials: true})
+                const { data, status} = !query ? await axios.get(`/admin/getAllAdmin`, {withCredentials: true}) : await axios.get(`/admin/getAdmin/${query}`, {withCredentials: true})
                 //console.log('Data from Hooks>>>', data, 'STATUS', status)
 
                 if(status === 200){
@@ -261,4 +261,134 @@ export function fetchStaffs(query){
     }, [query])
 
     return staffsData
+}
+
+//FETCH STAFFS
+export function fetchCms(query){
+    const [ cmsData, setCmsData ] = useState({ isFetchingCmsData: true, cmsData: null, cmsStatus: null, cmsError: null, })
+    
+    useEffect(() => {
+        const fetchCmsData = async () => {
+            try {
+                const { data, status} = !query ? await axios.get(`/cms/getAllCms`, {withCredentials: true}) : await axios.get(`/cms/getCms/${query}`, {withCredentials: true})
+                //console.log('Data from Hooks>>>', data, 'STATUS', status)
+
+                if(status === 200){
+                    setCmsData({ isFetchingCmsData: false, cmsData: data, cmsStatus: status, cmsError: null})
+                } else{
+                    setCmsData({ isFetchingCmsData: false, cmsData: null, cmsStatus: status, cmsError: null})
+                }
+            } catch (error) {
+                console.log('object', error)
+                setCmsData({ isFetchingCmsData: false, cmsData: null, cmsStatus: null, cmsError: error})
+            }
+        }
+        fetchCmsData()
+    }, [query])
+
+    return cmsData
+}
+
+//FETCH STUDENT STATS
+export function fetchStudentStats(query){
+    const [ studentStats, setStudentStats ] = useState({ isFetching: true, statsData: null, statsStatus: null, statsError: null, })
+    
+    useEffect(() => {
+        const fetchStudentStats = async () => {
+            try {
+                const { data, status} = !query ? await axios.get(`/student/getStudentStats/${query}`, {withCredentials: true}) : await axios.get(`/student/getStudentStats/${query}`, {withCredentials: true})
+                //console.log('Data from Hooks>>>', data, 'STATUS', status)
+
+                if(status === 200){
+                    setStudentStats({ isFetching: false, statsData: data, statsStatus: status, statsError: null})
+                } else{
+                    setStudentStats({ isFetching: false, statsData: null, statsStatus: status, statsError: null})
+                }
+            } catch (error) {
+                console.log('object', error)
+                setStudentStats({ isFetching: false, statsData: null, statsStatus: null, statsError: error})
+            }
+        }
+        fetchStudentStats()
+    }, [query])
+
+    return studentStats
+}
+
+//FETCH INSTRUCTOR STATS
+export function fetchInstructorStats(query){
+    const [ instructorStats, setInstructorStats ] = useState({ isFetching: true, statsData: null, statsStatus: null, statsError: null, })
+    
+    useEffect(() => {
+        const fetchInstructorStats = async () => {
+            try {
+                const { data, status} = !query ? await axios.get(`/instructor/getInstructorStats/${query}`, {withCredentials: true}) : await axios.get(`/instructor/getInstructorStats/${query}`, {withCredentials: true})
+                //console.log('Data from Hooks>>>', data, 'STATUS', status)
+
+                if(status === 200){
+                    setInstructorStats({ isFetching: false, statsData: data, statsStatus: status, statsError: null})
+                } else{
+                    setInstructorStats({ isFetching: false, statsData: null, statsStatus: status, statsError: null})
+                }
+            } catch (error) {
+                console.log('object', error)
+                setInstructorStats({ isFetching: false, statsData: null, statsStatus: null, statsError: error})
+            }
+        }
+        fetchInstructorStats()
+    }, [query])
+
+    return instructorStats
+}
+
+//FETCH ORGANIZATION STATS
+export function fetchOrganizationStats(query){
+    const [ organizationStats, setOrganizationStats ] = useState({ isFetching: true, statsData: null, statsStatus: null, statsError: null, })
+    
+    useEffect(() => {
+        const fetchOrganizationStats = async () => {
+            try {
+                const { data, status} = !query ? await axios.get(`/organization/getOrganizationStats/${query}`, {withCredentials: true}) : await axios.get(`/organization/getOrganizationStats/${query}`, {withCredentials: true})
+                //console.log('Data from Hooks>>>', data, 'STATUS', status)
+
+                if(status === 200){
+                    setOrganizationStats({ isFetching: false, statsData: data, statsStatus: status, statsError: null})
+                } else{
+                    setOrganizationStats({ isFetching: false, statsData: null, statsStatus: status, statsError: null})
+                }
+            } catch (error) {
+                console.log('object', error)
+                setOrganizationStats({ isFetching: false, statsData: null, statsStatus: null, statsError: error})
+            }
+        }
+        fetchOrganizationStats()
+    }, [query])
+
+    return organizationStats
+}
+
+//FETCH ORGANIZATION STATS
+export function fetchCourseStats(query){
+    const [ courseStats, setCourseStats ] = useState({ isFetching: true, statsData: null, statsStatus: null, statsError: null, })
+    
+    useEffect(() => {
+        const fetchCourseStats = async () => {
+            try {
+                const { data, status} = !query ? await axios.get(`/course/getCourseStats/${query}`, {withCredentials: true}) : await axios.get(`/course/getCourseStats/${query}`, {withCredentials: true})
+                //console.log('Data from Hooks>>>', data, 'STATUS', status)
+
+                if(status === 200){
+                    setCourseStats({ isFetching: false, statsData: data, statsStatus: status, statsError: null})
+                } else{
+                    setCourseStats({ isFetching: false, statsData: null, statsStatus: status, statsError: null})
+                }
+            } catch (error) {
+                console.log('object', error)
+                setCourseStats({ isFetching: false, statsData: null, statsStatus: null, statsError: error})
+            }
+        }
+        fetchCourseStats()
+    }, [query])
+
+    return courseStats
 }

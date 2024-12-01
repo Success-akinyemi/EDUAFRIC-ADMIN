@@ -8,27 +8,29 @@ import { FiMoreVertical } from "react-icons/fi";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { MdOutlineDeleteOutline } from "react-icons/md";
 import { Link } from "react-router-dom";
-import { blackListInstructor, blackListStudent } from "../../Helpers/apis";
+import { deleteCms } from "../../Helpers/apis";
 import toast from "react-hot-toast";
+import Button from "../Helpers/Button";
 
-function DataTable({ data, loading, timeDate, setTimeDate }) {
+function Draft({ data, loading, setCardState, setSelectedCard, setCmsId }) {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState(""); // State for search input
-  const instructorData = data || [];
+  const studentData = data || [];
   const itemsPerPage = 6;
+  //console.log('objectddf', studentData)
 
-  // Filter students based on the search term (instructorID or email)
-  const filteredData = instructorData.filter(
-    (instructor) =>
-      instructor?.instructorID?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      instructor?.email?.toLowerCase().includes(searchTerm.toLowerCase())
+  // Filter students based on the search term (studentID or email)
+  const filteredData = studentData?.filter(
+    (student) =>
+      student?.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      student?.message.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   // Calculate the total number of pages for filtered data
-  const totalPages = Math.ceil(filteredData.length / itemsPerPage);
+  const totalPages = Math.ceil(filteredData?.length / itemsPerPage);
 
   // Get the current page's students based on filtered data
-  const currentStudents = filteredData.slice(
+  const currentStudents = filteredData?.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
   );
@@ -107,39 +109,39 @@ function DataTable({ data, loading, timeDate, setTimeDate }) {
     }
   };
 
+  //TOGGLE BLACKLIST
+  const [ blacklisting, setBlacklisting ] = useState(false)
+  const handleDeleteCms = async (value) => {
+    setCmsId(value),
+    setSelectedCard('deleteCms')
+  }
 
-    //TOGGLE BLACKLIST
-    const [ blacklisting, setBlacklisting ] = useState(false)
-    const handleBlacklsitStudent = async (value) => {
-      try {
-        setBlacklisting(true)
-        const res = await blackListInstructor({ id: value })
-        if(res.success){
-          toast.success(res.data)
-          window.location.reload()
-        } else {
-          toast.error(res.data)
-        }
-      } catch {
-  
-      } finally {
-        setBlacklisting(false)
-      }
-    };
+  function truncateText(text, wordLimit) {
+    if (!text) return "";
+    
+    const words = text.split(" "); // Split text into an array of words
+    if (words.length <= wordLimit) return text; // Return text if it's within the word limit
+    
+    return words.slice(0, wordLimit).join(" ") + "..."; // Join the first N words and append "..."
+  }
+
+  const handleAddContent = () => {
+    setCardState('addContent')
+  }
 
   return (
     <div className="flex flex-col p-4 gap-[30px] bg-white border-[1px] border-white shadow-sm rounded-t-[12px]">
       <div className="flex w-full items-center justify-between">
         <div className="flex items-center gap-[50px]">
           <h3 className="text-lg font-semibold text-[#121212]">
-            {filteredData.length} Instructors
+            {filteredData?.length} Drafts
           </h3>
           <div className="flex items-center w-[400px] bg-white gap-[6px] rounded-[8px] border-[1px] py-[10px] px-[14px]">
-            <CiSearch className="text-[21px]" />
+            <CiSearch className="text-[21px] cursor-pointer" />
             <input
               type="text"
               className="input border-none p-0"
-              placeholder="Search by ID or Email"
+              placeholder="Search"
               value={searchTerm}
               onChange={(e) => {
                 setSearchTerm(e.target.value); // Update search term on input change
@@ -150,9 +152,8 @@ function DataTable({ data, loading, timeDate, setTimeDate }) {
         </div>
 
         <div>
-          <div className="w-full flex">
-            <DateFilter setTimeDate={setTimeDate} timeDate={timeDate} />
-          </div>
+            {/**NEW CONTENT */}
+            <Button onCLick={handleAddContent} text={'Add Content'} />
         </div>
       </div>
 
@@ -166,16 +167,16 @@ function DataTable({ data, loading, timeDate, setTimeDate }) {
             <thead>
               <tr className="bg-[#F9F9F9] rounded-t-[12px]">
                 <th className="px-6 py-3 text-left text-gray-600 font-medium text-[12px] tracking-wider">
-                  Instructor Name
+                  Title
                 </th>
                 <th className="px-6 py-3 text-left text-gray-600 font-medium text-[12px] tracking-wider">
-                  Display Name
+                  Message
                 </th>
                 <th className="px-6 py-3 text-left text-gray-600 font-medium text-[12px] tracking-wider">
-                    Instructor ID
+                  Type
                 </th>
                 <th className="px-6 py-3 text-left text-gray-600 font-medium text-[12px] tracking-wider">
-                  Email Address
+                  Author
                 </th>
                 <th className="px-6 py-3 text-left text-gray-600 font-medium text-[12px] tracking-wider">
                   Date & Time
@@ -186,23 +187,22 @@ function DataTable({ data, loading, timeDate, setTimeDate }) {
               </tr>
             </thead>
             <tbody>
-              {currentStudents.map((student) => {
+              {currentStudents?.map((student) => {
                 const { formattedDate, formattedTime } = formatDateAndTime(
                   student?.createdAt
                 );
                 return (
                   <tr key={student?._id}>
                     <td className="px-6 py-4 text-[14px] text-[#121212] font-normal">
-                      {student?.name}
+                      {truncateText(student?.title, 8)}
                     </td>
-                    <td className="px-6 py-4 text-[14px] text-[#121212] font-normal">
-                      {student?.displayName}
+                    <td dangerouslySetInnerHTML={{ __html: truncateText(student?.message, 8) }} className="px-6 py-4 text-[14px] text-[#121212] font-normal">
                     </td>
-                    <td className="px-6 py-4 text-[14px] font-normal text-[#13693B]">
-                      {student?.instructorID}
+                    <td className="px-6 py-4 text-[14px] font-normal text-[#585858]">
+                      {student?.type === 'pushnotification' ? 'Push Notification' : 'Mail'}
                     </td>
-                    <td className="px-6 py-4 text-[14px] text-[#121212] font-normal">
-                      {student?.email}
+                    <td className="px-6 py-4 text-[14px] font-normal text-[#585858]">
+                      {student?.author}
                     </td>
                     <td className="px-6 text-center py-4 text-[14px] text-[#121212] font-normal">
                       <p className="text-[14px] font-normal text-[#121212]">
@@ -215,19 +215,9 @@ function DataTable({ data, loading, timeDate, setTimeDate }) {
                     <td className="px-6 py-4">
                       <div className="relative cursor-pointer flex items-center justify-center gap-2 group">
                         <div
-                          className={`py-[5px] px-[10px] rounded-[100px] ${
-                            student?.blocked
-                              ? "bg-[#D8E0E5] text-[#585858]" // Blacklisted style
-                              : student?.verified
-                              ? "bg-[#05A75312] text-primary-color" // Active style
-                              : "bg-[#FEF3F2] text-error" // Inactive style
-                          }`}
+                          className={`py-[5px] px-[10px] rounded-[100px] bg-[#D8E0E5] text-[#585858]`}
                         >
-                          {student?.blocked
-                            ? "Blacklisted"
-                            : student?.verified
-                            ? "Active"
-                            : "Inactive"}
+                          {student?.status}
                         </div>
 
                         <div>
@@ -237,7 +227,7 @@ function DataTable({ data, loading, timeDate, setTimeDate }) {
                         {/* MODAL POPUP, visible only on hover */}
                         <div className="absolute z-50 top-8 flex flex-col gap-3 bg-white border-[1px] border-gray-200 shadow-lg rounded-[8px] p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 w-[170px]">
                           <Link
-                            to={`/instructor/${student._id}`}
+                            to={`/edit-cms/${student._id}`}
                             className="flex items-center gap-3 text-sm text-primary-color"
                           >
                             <MdOutlineRemoveRedEye />
@@ -245,10 +235,10 @@ function DataTable({ data, loading, timeDate, setTimeDate }) {
                           </Link>
                           <button
                             className="flex items-center gap-3 text-sm text-[#D34B56]"
-                            onClick={() => handleBlacklsitStudent(student._id)}
+                            onClick={() => handleDeleteCms(student._id)}
                           >
                             <MdOutlineDeleteOutline />
-                            { student?.blocked ? 'Account BLocked' : blacklisting ? 'Blacklisting...' : 'Blacklist'}
+                            { blacklisting ? 'Deleting...' : 'Delete'}
                           </button>
                         </div>
                       </div>
@@ -262,20 +252,20 @@ function DataTable({ data, loading, timeDate, setTimeDate }) {
       </div>
 
       <div className="w-full flex justify-center items-center pt-[30px]">
-        <div className="flex gap-[8px] items-center justify-between w-full">
+        <div className="flex w-full gap-[8px] items-center justify-between">
           <button
             onClick={handlePreviousPage}
-            className="px-3 py-1 border rounded bg-white"
+            className="px-3 py-1 border rounded bg-white flex gap-[8px] items-center justify-center"
           >
             <FaArrowLeft />
+            Previous
           </button>
-          <div className="">
-            {renderPagination()}
-          </div>
+          {renderPagination()}
           <button
             onClick={handleNextPage}
-            className="px-3 py-1 border rounded bg-white"
+            className="px-3 py-1 border rounded bg-white flex gap-[8px] items-center justify-center"
           >
+            Next
             <FaArrowRight />
           </button>
         </div>
@@ -284,4 +274,4 @@ function DataTable({ data, loading, timeDate, setTimeDate }) {
   );
 }
 
-export default DataTable;
+export default Draft;

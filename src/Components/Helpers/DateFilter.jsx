@@ -82,7 +82,7 @@ function DateFilter({ setTimeDate, timeDate }) {
 
       {/**FILTER CARD */}
       {showFilter && (
-        <div className="card w-[279px] absolute flex flex-col right-4 top-6">
+        <div className="card bg-white z-[999] w-[279px] absolute flex flex-col right-4 top-6">
           <div className="flex items-center justify-between pb-5 border-b">
             <h2 className="text-off-black text-[18px] font-semibold">
               Filter

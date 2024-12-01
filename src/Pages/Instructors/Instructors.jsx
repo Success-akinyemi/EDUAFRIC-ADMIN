@@ -20,7 +20,7 @@ function Instructors() {
               <h2 className="text-off-black text-[30px] font-semibold" >Instructors</h2>
 
               <div className="mt-8 mb-[30px]">
-                <Stats />
+                <Stats timeDate={timeDate} setTimeDate={setTimeDate} />
               </div>
 
               <InstructorsList timeDate={timeDate} setTimeDate={setTimeDate} />

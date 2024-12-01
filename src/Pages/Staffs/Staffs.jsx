@@ -2,7 +2,7 @@ import Navbar from "../../Components/Helpers/Navbar"
 import Sidebar from "../../Components/Helpers/Sidebar"
 import StaffList from "../../Components/StaffUi/StaffList"
 
-function Staffs() {
+function Staffs({ setAdminStaffId, setSelectedCard }) {
     return (
         <div className="page relative">
           <div className="fixed w-[257px] h-[100vh] left-0 top-0">
@@ -21,7 +21,7 @@ function Staffs() {
               
             </div>
 
-              <StaffList /> 
+              <StaffList setAdminStaffId={setAdminStaffId} setSelectedCard={setSelectedCard} /> 
     
           </div>
     

@@ -69,7 +69,7 @@ function RejectCourseModal({ setSelectedCard }) {
                     <>
                         <Button onCLick={handleRejectCourse} text={'Send'}  />
             
-                        <Button onCLick={handleClosePopup} text={'Cancel'} style={`bg-transparent text-[#000000] border-[#D0D5DD] hover:bg-[#D0D5DD] hover:text-white`} />
+                        <Button onCLick={handleClosePopup} text={'Cancel'} style={`bg-transparent !text-[#000] !border-[#D0D5DD] hover:bg-[#D0D5DD] hover:text-white`} />
                     </>
                 )
             }

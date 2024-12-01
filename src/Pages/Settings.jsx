@@ -35,7 +35,7 @@ function Settings({ setSelectedCard, setCountryId }) {
                   <div className="w-full flex items-center gap-4 border-b-[1px] border-b-[#D9DBE9]">
                     {
                       options?.map((item, idx) => (
-                        <div key={idx} onClick={() => handleToggle(item?.slug)} className={`flex flex-col pt-[1px] pb-[11px] py-[4px] cursor-pointer border-b-[2px] min-w-[99px] items-center justify-center ${item?.slug === cardState ? 'text-primary-color border-b-primary-color' : 'text-[#364152]' }`}>
+                        <div key={idx} onClick={() => handleToggle(item?.slug)} className={`flex min-w-[103px] flex-col pt-[1px] pb-[11px] py-[4px] cursor-pointer border-b-[2px] items-center justify-center ${item?.slug === cardState ? 'text-primary-color border-b-primary-color' : 'text-[#364152]' }`}>
                           {item?.name}
                         </div>
                       ))

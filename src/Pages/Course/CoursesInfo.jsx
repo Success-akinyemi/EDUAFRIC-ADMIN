@@ -11,6 +11,7 @@ import Spinner from "../../Components/Helpers/Spinner";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { approveCourse, rejectCourse } from "../../Helpers/apis";
+import Button from "../../Components/Helpers/Button";
 
 function CoursesInfo({ setSelectedCard }) {
     const navigate = useNavigate();
@@ -84,6 +85,10 @@ function CoursesInfo({ setSelectedCard }) {
     
       const handleToggle = (value) => {
         setCardState(value)
+      }
+
+      const handleCouponCode = () => {
+        setSelectedCard('addCouponCode')
       }
   
     return (
@@ -166,14 +171,20 @@ function CoursesInfo({ setSelectedCard }) {
               </div>
 
               {/**SELECT */}
-              <div className="w-full flex items-center gap-4 border-b-[1px] border-b-[#D9DBE9]">
-                {
-                  options?.map((item, idx) => (
-                    <div key={idx} onClick={() => handleToggle(item?.slug)} className={`flex flex-col pt-[1px] pb-[11px] py-[4px] cursor-pointer border-b-[2px] min-w-[99px] items-center justify-center font-semibold ${item?.slug === cardState ? 'text-primary-color border-b-primary-color' : 'text-[#364152]' }`}>
-                      {item?.name}
-                    </div>
-                  ))
-                }
+              <div className="w-full flex items-center justify-between gap-4 border-b-[1px] border-b-[#D9DBE9]">
+                  <div className="flex items-center gap-4">
+                    {
+                      options?.map((item, idx) => (
+                        <div key={idx} onClick={() => handleToggle(item?.slug)} className={`flex flex-col pt-[1px] pb-[11px] py-[4px] cursor-pointer border-b-[2px] min-w-[99px] items-center justify-center font-semibold ${item?.slug === cardState ? 'text-primary-color border-b-primary-color' : 'text-[#364152]' }`}>
+                          {item?.name}
+                        </div>
+                      ))
+                    }
+                  </div>
+
+                  <div className="">
+                    <Button onCLick={handleCouponCode} text={'Addd Coupon Code'} />
+                  </div>
                 </div>
 
                 {
