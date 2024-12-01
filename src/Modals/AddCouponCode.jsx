@@ -51,7 +51,7 @@ function AddCouponCode({ setSelectedCard }) {
 
             <div className="inputGroup">
                 <label className="label">Enter Percentage Discount</label>
-                <input type="percentageOff" onChange={handleChange} className="input" placeholder="Discount e.g 1 - 100%" />
+                <input type="text" id="percentageOff" onChange={handleChange} className="input" placeholder="Discount e.g 1 - 100%" />
             </div>
 
             <div className="inputGroup">
