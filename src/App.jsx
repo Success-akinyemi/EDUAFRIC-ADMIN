@@ -41,6 +41,7 @@ import DeleteCms from './Modals/DeleteCms'
 import AddCouponCode from './Modals/AddCouponCode'
 import DeleteCouponCode from './Modals/DeleteCouponCode'
 import EditCouponCode from './Modals/EditCouponCode'
+import PushNotifications from './Demo/PushNotifications'
 
 function App() {
   const [ selectedCard, setSelectedCard ] = useState(null)
@@ -218,6 +219,8 @@ function App() {
         {/**DEMO */}
         <Route path='/demo/chat' element={<Chat />} />
         <Route path='/demo/file-upload' element={<FileUpload />} />
+        <Route path='/demo/PushNotifications' element={<PushNotifications />} />
+
         </Routes>
       </BrowserRouter>
     </div>

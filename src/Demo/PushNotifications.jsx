@@ -1,10 +1,24 @@
+import { checkPermission, requestNotificationPermission, registerSW } from './Helpers/script';
 
-function PushNotifications() {
-  return (
-    <div>
-      PUSH
-    </div>
-  )
-}
+const PushNotifications = () => {
+    const enableNotifications = async () => {
+        try {
+            checkPermission();
+            await requestNotificationPermission();
+            await registerSW();
+            alert('Notifications enabled!');
+        } catch (error) {
+            console.error("Error enabling notifications:", error);
+        }
+    };
 
-export default PushNotifications
+    return (
+        <div style={{ textAlign: 'center', marginTop: '20px' }}>
+            <button onClick={enableNotifications}>
+                Enable Notifications
+            </button>
+        </div>
+    );
+};
+
+export default PushNotifications;
