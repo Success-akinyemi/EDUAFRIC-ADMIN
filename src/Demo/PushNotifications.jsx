@@ -2,7 +2,7 @@
 function PushNotifications() {
   return (
     <div>
-      
+      PUSH
     </div>
   )
 }
