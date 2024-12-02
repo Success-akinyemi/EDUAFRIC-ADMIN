@@ -3,6 +3,7 @@ import Navbar from "../../Components/Helpers/Navbar";
 import Sidebar from "../../Components/Helpers/Sidebar";
 import { IoIosArrowBack } from "react-icons/io";
 import {
+  fetchCouponCodes,
   fetchCourseContentForAdmin,
   fetchInstructorsCourses,
 } from "../../Helpers/fetch.api";
@@ -12,8 +13,9 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { approveCourse, rejectCourse } from "../../Helpers/apis";
 import Button from "../../Components/Helpers/Button";
+import CouponCode from "../../Components/CourseUi/CouponCode";
 
-function CoursesInfo({ setSelectedCard }) {
+function CoursesInfo({ setSelectedCard, setCouponCodeId }) {
     const navigate = useNavigate();
     const loc = useLocation();
     const pathName = loc.pathname.split("/")[2];
@@ -28,7 +30,10 @@ function CoursesInfo({ setSelectedCard }) {
     } = fetchCourseContentForAdmin(pathName);
     const courseContent = courseContentData?.data
     const courseContentStatus = courseContentServerError?.response?.data?.msg
-  
+    
+    const { couponCodeData, isFetchingCoupon } = fetchCouponCodes({ all: true, id: pathName })
+    const couponData = couponCodeData?.data
+
     const { formattedDate, formattedTime } = formatDateAndTime(
       dataArray?.createdAt
     );
@@ -79,6 +84,10 @@ function CoursesInfo({ setSelectedCard }) {
         {
             name: 'Course Log',
             slug: 'courselog'
+        },
+        {
+          name: 'Coupon Code',
+          slug: 'couponcode'
         }
       ]
       const [ cardState, setCardState ] = useState(options[0]?.slug)
@@ -375,7 +384,7 @@ function CoursesInfo({ setSelectedCard }) {
                                 ) : (
                                     courseContent?.map((item) => (
                                     <div className="flex flex-col gap-6 border-b-[1px] py-8 ">
-                                        {console.log('object', courseContent)}
+                                        {/** console.log('object', courseContent)*/}
                                         <h2 className="text-[#344054] text-[16px] font-semibold">
                                         {item?.sectionTitle}
                                         </h2>
@@ -443,6 +452,19 @@ function CoursesInfo({ setSelectedCard }) {
                             </div>
                         </div>
                       </>
+                    )
+                  }
+                  {
+                    cardState === 'couponcode' && (
+                      <div className="card mb-12 flex flex-col border-[1px] border-[#EFF0F6] shadow-sm rounded-[12px]">
+                        <div className="border-b-[1px] border-b-[#EFF0F6]">
+                          <p className="font-semibold text-[16px] text-[#344054]">
+                              Coupon Codes
+                          </p>
+                        </div>
+
+                        <CouponCode data={couponData} loading={isFetchingCoupon} setSelectedCard={setSelectedCard} setCouponCodeId={setCouponCodeId} />
+                      </div>
                     )
                   }
   

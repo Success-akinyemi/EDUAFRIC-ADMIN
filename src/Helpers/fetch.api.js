@@ -395,26 +395,26 @@ export function fetchCourseStats(query){
 
 //FETCH COUPON CODE
 export function fetchCouponCodes(query){
-    const [ couponCodeData, setCouponCodeData ] = useState({ isFetching: true, couponCodeData: null, couponCodeStatus: null, couponCodeError: null, })
-    
+    const [ couponCodeData, setCouponCodeData ] = useState({ isFetchingCoupon: true, couponCodeData: null, couponCodeStatus: null, couponCodeError: null, })
+    const { all, id } = query
     useEffect(() => {
         const fetchCouponCode = async () => {
             try {
-                const { data, status} = !query ? await axios.get(`/course/getCourseStats/${query}`, {withCredentials: true}) : await axios.get(`/course/getCourseStats/${query}`, {withCredentials: true})
+                const { data, status} = all ? await axios.get(`/coupon/getCoupons/${id}`, {withCredentials: true}) : await axios.get(`/coupon/getCouponCode/${id}`, {withCredentials: true})
                 //console.log('Data from Hooks>>>', data, 'STATUS', status)
 
                 if(status === 200){
-                    setCouponCodeData({ isFetching: false, couponCodeData: data, couponCodeStatus: status, couponCodeError: null})
+                    setCouponCodeData({ isFetchingCoupon: false, couponCodeData: data, couponCodeStatus: status, couponCodeError: null})
                 } else{
-                    setCouponCodeData({ isFetching: false, couponCodeData: null, couponCodeStatus: status, couponCodeError: null})
+                    setCouponCodeData({ isFetchingCoupon: false, couponCodeData: null, couponCodeStatus: status, couponCodeError: null})
                 }
             } catch (error) {
-                console.log('object', error)
-                setCouponCodeData({ isFetching: false, couponCodeData: null, couponCodeStatus: null, couponCodeError: error})
+                console.log('coupon error', error)
+                setCouponCodeData({ isFetchingCoupon: false, couponCodeData: null, couponCodeStatus: null, couponCodeError: error})
             }
         }
         fetchCouponCode()
-    }, [query])
+    }, [all, id])
 
     return couponCodeData
 }

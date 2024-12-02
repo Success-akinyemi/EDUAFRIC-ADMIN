@@ -39,12 +39,15 @@ import EditStaff from './Modals/EditStaff'
 import EditCMS from './Pages/CMS/EditCMS'
 import DeleteCms from './Modals/DeleteCms'
 import AddCouponCode from './Modals/AddCouponCode'
+import DeleteCouponCode from './Modals/DeleteCouponCode'
+import EditCouponCode from './Modals/EditCouponCode'
 
 function App() {
   const [ selectedCard, setSelectedCard ] = useState(null)
   const [ countryId, setCountryId ] = useState()
   const [ adminStaffId, setAdminStaffId ] = useState()
   const [ cmsId, setCmsId ] = useState()
+  const [ couponCodeId, setCouponCodeId ] = useState()
 
   const renderPopup = () => {
     switch(selectedCard){
@@ -88,6 +91,18 @@ function App() {
         return (
           <div>
             <AddCouponCode setSelectedCard={setSelectedCard} />
+          </div>
+        )
+      case 'editCouponCode':
+        return (
+          <div>
+            <EditCouponCode setSelectedCard={setSelectedCard} couponCodeId={couponCodeId} setCouponCodeId={setCouponCodeId} />
+          </div>
+        )
+      case 'deleteCouponCode':
+        return (
+          <div>
+            <DeleteCouponCode couponCodeId={couponCodeId} setCouponCodeId={setCouponCodeId} />
           </div>
         )
     }
@@ -172,7 +187,7 @@ function App() {
             <Route path='/course' element={<Course />} />
           </Route>
           <Route element={<AuthorizeAdmin />} >
-            <Route path='/course-info/:id' element={<CoursesInfo setSelectedCard={setSelectedCard} />} />
+            <Route path='/course-info/:id' element={<CoursesInfo setSelectedCard={setSelectedCard} setCouponCodeId={setCouponCodeId} />} />
           </Route>
           <Route element={<AuthorizeAdmin />} >
             <Route path='/messages' element={<Messages />} />

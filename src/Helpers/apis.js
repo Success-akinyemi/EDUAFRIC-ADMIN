@@ -278,7 +278,7 @@ export async function deleteCms({ id }) {
     }
 }
 
-//CREATE COUPON
+//CREATE COURSE COUPON CODE
 export async function createCoupon(formData) {
     try {
         const res = await axios.post('/coupon/createCoupon', formData, {withCredentials: true})
@@ -286,6 +286,30 @@ export async function createCoupon(formData) {
     } catch (error) {
         console.log('objectddd', error)
         const res = error.response || 'Unable to create coupon data'
+        return res?.data
+    }
+}
+
+//EDIT COURSE COUPON CODE
+export async function updateCoupon(formData) {
+    try {
+        const res = await axios.post('/coupon/updateCoupon', formData, {withCredentials: true})
+        return res.data
+    } catch (error) {
+        console.log('objectddd', error)
+        const res = error.response || 'Unable to create coupon data'
+        return res?.data
+    }
+}
+
+//DELETE COURSE COUPON CODE
+export async function deleteCouponCode({ id }) {
+    try {
+        const res = await axios.post('/coupon/deleteCouponCode', { id }, {withCredentials: true})
+        return res.data
+    } catch (error) {
+        console.log('objectddd', error)
+        const res = error.response || 'Unable to delete coupon data'
         return res?.data
     }
 }
