@@ -82,9 +82,9 @@ function SignupCard({ setErrorCard }) {
       <div className="w-[574px] flex flex-col gap-4">
         {/**INTRO */}
         <div className="flex flex-col gap-[5px]">
-          <h3 className="text-text-color-1 text-[30px] font-bold">
-          Create an EduAfrica Admin <br /> account
-        </h3>
+          <h3 className="text-text-color-1 text-[30px] medium-pc:text-[24px] font-bold">
+            Create an EduAfrica Admin <br /> account
+          </h3>
   
           <p className=" text-[16px] font-normal text-text-color-2">Get started to management of your student, instructor and organization</p>
         </div>

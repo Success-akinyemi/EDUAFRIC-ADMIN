@@ -10,8 +10,8 @@ function Signin() {
     <div className="relative flex items-center justify-center w-[100vw] h-[100vh]">
       
       <div className="w-[60%] flex items-center justify-center flex-col">
-        <div className="mb-12 w-full ml-64">
-          <Logo imgStyle={'w-[90px]'} textStyle={`text-primary-color text-[36px]`} />
+        <div className="mb-12 medium-pc:mb-7 small-pc:mb-6 w-full ml-64">
+          <Logo imgStyle={'w-[90px] medium-pc:w-[70px]'} textStyle={`text-primary-color text-[36px]`} />
 
         </div>
         <SigninCard setErrorCard={setErrorCard} />
