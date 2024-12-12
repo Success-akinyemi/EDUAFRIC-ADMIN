@@ -310,7 +310,7 @@ function CoursesInfo({ setSelectedCard, setCouponCodeId }) {
                                     Course categories
                                     </h2>
                                     <p className="text-xs font-normal text-[#585858]">
-                                    {dataArray?.category.map((item) => `${item}, `)}
+                                    {dataArray?.category?.map((item) => `${item}, `)}
                                     </p>
                                 </div>
                                 </div>
@@ -382,7 +382,7 @@ function CoursesInfo({ setSelectedCard, setCouponCodeId }) {
                                 ) : courseContentStatus ? (
                                     <p className="text-center text-error text-[19px] my-8">{courseContentStatus}</p>
                                 ) : (
-                                    courseContent?.map((item) => (
+                                    courseContent?.sections?.map((item) => (
                                     <div className="flex flex-col gap-6 border-b-[1px] py-8 ">
                                         {/** console.log('object', courseContent)*/}
                                         <h2 className="text-[#344054] text-[16px] font-semibold">
