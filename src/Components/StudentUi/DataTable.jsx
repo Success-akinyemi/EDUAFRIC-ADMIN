@@ -203,7 +203,7 @@ function DataTable({ data, loading, timeDate, setTimeDate }) {
                     <td className="px-6 py-4 text-[14px] text-[#121212] font-normal">
                       {student?.email}
                     </td>
-                    <td className="px-6 text-center py-4 text-[14px] text-[#121212] font-normal">
+                    <td className="px-6 py-4 text-[14px] text-[#121212] font-normal">
                       <p className="text-[14px] font-normal text-[#121212]">
                         {formattedDate}
                       </p>
@@ -212,7 +212,7 @@ function DataTable({ data, loading, timeDate, setTimeDate }) {
                       </p>
                     </td>
                     <td className="px-6 py-4">
-                      <div className="relative cursor-pointer flex items-center justify-center gap-2 group">
+                      <div className="relative cursor-pointer flex justify-between gap-2 group">
                         <div
                           className={`py-[5px] px-[10px] rounded-[100px] ${
                             student?.blocked

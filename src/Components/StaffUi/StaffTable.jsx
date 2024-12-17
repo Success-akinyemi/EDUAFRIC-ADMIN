@@ -201,28 +201,28 @@ function StaffTable({ data, loading, setSelectedCard, setAdminStaffId }) {
                 );
                 return (
                   <tr key={order?._id}>
-                    <td className="px-6 py-4 text-[13px] text-[#121212] font-normal">
+                    <td className="px-6 py-4 text-[14px] text-[#121212] font-normal">
                       {order?.firstName} {order?.lastName}
                     </td>
-                    <td className="px-6 py-4 text-[13px] text-[#121212] font-normal">
+                    <td className="px-6 py-4 text-[14px] text-[#121212] font-normal">
                       {order?.email}
                     </td>
-                    <td className="px-6 py-4 text-[13px] font-normal text-[#13693B]">
+                    <td className="px-6 py-4 text-[14px] font-normal text-[#13693B]">
                       {order?.role}
                     </td>
-                    <td className="px-6 py-4 text-[13px] text-[#121212] font-normal">
+                    <td className="px-6 py-4 text-[14px] text-[#121212] font-normal">
                       {order?.staffID}
                     </td>
-                    <td className="px-6 text-center py-4 text-[13px] text-[#121212] font-normal">
-                      <p className="text-[13px] font-normal text-[#121212]">
+                    <td className="px-6 py-4 text-[14px] text-[#121212] font-normal">
+                      <p className="text-[14px] font-normal text-[#121212]">
                         {formattedDate}
                       </p>
-                      <p className="text-[13px] font-normal text-[#717171]">
+                      <p className="text-[14px] font-normal text-[#717171]">
                         {formattedTime}
                       </p>
                     </td>
                     <td className="px-6 py-4">
-                      <div className="relative cursor-pointer flex items-center justify-center gap-2 group">
+                      <div className="relative cursor-pointer flex justify-between gap-2 group">
                         <div
                             className={`py-[5px] px-[10px] rounded-[100px] ${
                                 order?.blocked === true

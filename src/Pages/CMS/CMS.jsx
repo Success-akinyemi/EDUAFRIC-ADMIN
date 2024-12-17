@@ -50,7 +50,7 @@ function CMS({ setCmsId, setSelectedCard }) {
               <div className="w-full flex items-center gap-4 border-b-[1px] border-b-[#D9DBE9]">
                 {
                   options?.map((item, idx) => (
-                    <div key={idx} onClick={() => handleToggle(item?.slug)} className={`flex min-w-[103px] items-center justify-center flex-col pt-[1px] pb-[11px] py-[4px] cursor-pointer border-b-[2px] ${item?.slug === cardState ? 'text-primary-color border-b-primary-color' : 'text-[#364152]' }`}>
+                    <div key={idx} onClick={() => handleToggle(item?.slug)} className={`flex min-w-[103px] items-center justify-center flex-col pt-[1px] pb-[11px] py-[4px] cursor-pointer border-b-[2px] ${item?.slug === cardState ? 'text-primary-color border-b-primary-color' : 'text-[#364152] border-b-transparent' }`}>
                       {item?.name}
                     </div>
                   ))

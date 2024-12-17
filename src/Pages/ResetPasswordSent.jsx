@@ -9,22 +9,25 @@ function ResetPasswordSent() {
       <div className="relative flex items-center justify-center w-[100vw] h-[100vh]">
         
         <div className="w-[60%] flex items-center justify-center flex-col gap-32">
-          <div className="mb-12 w-full ml-64">
-          <Logo imgStyle={'w-[90px]'} textStyle={`text-primary-color text-[36px]`} />
-  
-          </div>
+          <div className="w-[574px]">
+              <div className="mb-12 w-full">
+              <Logo imgStyle={'w-[90px]'} textStyle={`text-primary-color text-[36px]`} />
+      
+              </div>
 
-            <div className="w-[574px] flex flex-col gap-16">
-                {/**INTRO */}
-                <div className="flex flex-col gap-[10px]">
-                    <h3 className="text-text-color-1 text-[30px] font-bold">Reset Password Email Sent</h3>
+                <div className="w-[574px] flex flex-col gap-16">
+                    {/**INTRO */}
+                    <div className="flex flex-col gap-[10px]">
+                        <h3 className="text-text-color-1 text-[30px] font-bold">Reset Password Email Sent</h3>
 
-                    <p className="text-[16px] font-normal text-text-color-2">
-                        Reset password link sent to email address. <br />
-                        check email address.
-                    </p>
+                        <p className="text-[16px] font-normal text-text-color-2">
+                            Reset password link sent to email address. <br />
+                            check email address.
+                        </p>
+                    </div>
                 </div>
-            </div>
+          
+          </div>
 
         </div>
   

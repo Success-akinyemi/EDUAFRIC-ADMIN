@@ -69,7 +69,7 @@ function SigninCard({ setErrorCard }) {
   }
 
   return (
-    <div className="w-[574px] flex flex-col gap-16 medium-pc:gap-11 small-pc:gap-9 ">
+    <div className="w-[574px] flex flex-col gap-16 medium-pc:gap-11 small-pc:gap-9">
       {/**INTRO */}
       <div className="flex flex-col gap-[10px]">
         <h3 className="text-text-color-1 text-[30px] font-bold">Welcome to EduAfrica</h3>

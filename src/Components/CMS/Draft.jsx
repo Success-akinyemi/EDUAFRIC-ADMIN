@@ -204,7 +204,7 @@ function Draft({ data, loading, setCardState, setSelectedCard, setCmsId }) {
                     <td className="px-6 py-4 text-[14px] font-normal text-[#585858]">
                       {student?.author}
                     </td>
-                    <td className="px-6 text-center py-4 text-[14px] text-[#121212] font-normal">
+                    <td className="px-6 py-4 text-[14px] text-[#121212] font-normal">
                       <p className="text-[14px] font-normal text-[#121212]">
                         {formattedDate}
                       </p>
@@ -213,7 +213,7 @@ function Draft({ data, loading, setCardState, setSelectedCard, setCmsId }) {
                       </p>
                     </td>
                     <td className="px-6 py-4">
-                      <div className="relative cursor-pointer flex items-center justify-center gap-2 group">
+                      <div className="relative cursor-pointer flex justify-between gap-2 group">
                         <div
                           className={`py-[5px] px-[10px] rounded-[100px] bg-[#D8E0E5] text-[#585858]`}
                         >

@@ -11,11 +11,14 @@ function ForgotPassword() {
       <div className="relative flex items-center justify-center w-[100vw] h-[100vh]">
         
         <div className="w-[60%] flex items-center justify-center flex-col">
-          <div className="mb-12 w-full ml-64">
-          <Logo imgStyle={'w-[90px]'} textStyle={`text-primary-color text-[36px]`} />
-  
+          <div className="w-[574px]">
+            <div className="mb-12 w-full">
+            <Logo imgStyle={'w-[90px]'} textStyle={`text-primary-color text-[36px]`} />
+    
+            </div>
+            <ForgotPasswordCard setErrorCard={setErrorCard} />
+
           </div>
-          <ForgotPasswordCard setErrorCard={setErrorCard} />
         </div>
   
         <div className="w-[40%] h-full flex items-center justify-center bg-gradient-to-bl from-[#FFE500] to-[#00BF63]">
