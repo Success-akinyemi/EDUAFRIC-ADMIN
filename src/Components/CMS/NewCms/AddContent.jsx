@@ -254,7 +254,7 @@ function AddContent() {
 
         <div className="flex-[30] flex flex-col items-center px-5 gap-6">
           <div className="inputGroup">
-            <p className="text-error font-semibold">Select CMS Type</p>
+            <p className="text-primary-color-2 font-semibold">Select CMS Type</p>
             <label className="label">Type</label>
             <select className="input" onChange={handleChange} id="type">
               <option value="">Select Type</option>

@@ -150,7 +150,7 @@ function DataTable({ data, loading, timeDate, setTimeDate }) {
 
         <div>
           <div className="w-full flex">
-            <DateFilter setTimeDate={setTimeDate} timeDate={timeDate} />
+            <DateFilter setTimeDate={setTimeDate} timeDate={timeDate} showActiveStats={true} />
           </div>
         </div>
       </div>

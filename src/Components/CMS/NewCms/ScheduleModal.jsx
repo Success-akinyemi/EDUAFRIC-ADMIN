@@ -101,34 +101,37 @@ function ScheduleModal({ formData, setFormData, setScheduleModal, setErrorMsg })
             <div className="flex items-start w-full gap-[30px]">
               {/* DATE */}
               <div className="flex-[6] flex flex-col gap-2">
-                <label
-                  htmlFor="date-picker"
-                  className="text-sm font-medium text-gray-600"
-                >
-                  Select Date
-                </label>
-                <div className="relative">
-                  <input
-                    type="text"
-                    id="date-picker"
-                    value={selectedDate}
-                    readOnly
-                    
-                    className="input cursor-pointer"
-                    placeholder="Click to select a date"
-                  />
                     <div className="flex items-center justify-center border-none mt-2">
                       <Calendar
                         onChange={handleDateChange}
                         value={selectedDate ? new Date(selectedDate) : null}
                         minDate={new Date()}
-                        className={`border-none`}
+                        className={`border-none bg-transparent`}
                       />
                     </div>
-                </div>
               </div>
 
               <div className="flex-[4] flex flex-col w-full gap-5">
+                {/**SELECTED DATE */}
+                <div className="">
+                    <label
+                      htmlFor="date-picker"
+                      className="text-sm font-medium text-gray-600"
+                    >
+                      Select Date
+                    </label>
+                    <div className="relative">
+                      <input
+                        type="text"
+                        id="date-picker"
+                        value={selectedDate}
+                        readOnly
+                        
+                        className="input cursor-pointer"
+                        placeholder="Click to select a date"
+                      />
+                    </div>
+                  </div>
                 {/* SELECTED DAY */}
                 <div className="flex flex-col gap-2">
                   <label
