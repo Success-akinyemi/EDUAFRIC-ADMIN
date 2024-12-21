@@ -29,7 +29,7 @@ function Navbar() {
                     </span>
                 </div>
 
-                <span className="h-[80%] w-[3px] bg-[#D9DBE9]"></span>
+                <span className="h-[80%] w-[1px] bg-[#D9DBE9]"></span>
 
                 <div 
                     className="relative cursor-pointer text-[#697586]"

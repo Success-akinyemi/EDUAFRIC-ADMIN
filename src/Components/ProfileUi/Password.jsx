@@ -76,7 +76,7 @@ function Password() {
 
         <div className="flex items-center gap-3 ml-auto">
           <div className="">
-              <Button text={'Cancel'} style={`bg-transparent hover:bg-transparent border-[1px] border-[#000000] text-[#000]`} />
+              <Button text={'Cancel'} style={`bg-transparent hover:bg-transparent border-[1px] !border-[#000000] !text-[#000]`} />
           </div>
           <div className="">
               <Button disabled={loading} onCLick={handleUpdatePassword} text={loading ? 'Updating...' : 'Update Password'} />
