@@ -118,7 +118,7 @@ export const menuLinks = [
             </span>
         },
         
-    */}
+    */},
     {
         name: 'CMS',
         link: '/cms',
