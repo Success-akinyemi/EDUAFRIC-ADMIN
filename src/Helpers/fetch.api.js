@@ -55,6 +55,32 @@ export function fetchStudentAllOrders(query){
     return oderData
 }
 
+//FETCH ALL ORDERS
+export function fetchAllOrders(query){
+    const [ oderData, setOrderData ] = useState({ isFetchingOrders: true, oderData: null, orderDataStatus: null, orderDataServerError: null, })
+    
+    useEffect(() => {
+        const fetchOrdersData = async () => {
+            try {
+                const { data, status} = !query ? await axios.get(`/orders/fetchAllOrders`, {withCredentials: true}) : await axios.get(`/orders/fetchOrder/${query}`, {withCredentials: true})
+                //console.log('Data from Hooks>>>', data, 'STATUS', status)
+
+                if(status === 200){
+                    setOrderData({ isFetchingOrders: false, oderData: data, orderDataStatus: status, orderDataServerError: null})
+                } else{
+                    setOrderData({ isFetchingOrders: false, oderData: null, orderDataStatus: status, orderDataServerError: null})
+                }
+            } catch (error) {
+                console.log('object', error)
+                setOrderData({ isFetchingOrders: false, oderData: null, orderDataStatus: null, orderDataServerError: error})
+            }
+        }
+        fetchOrdersData()
+    }, [query])
+
+    return oderData
+}
+
 //FETCH ALL INSTRUCTORS
 export function fetchAllInstructors(query){
     const [ instructorsData, setInstructorsData ] = useState({ isFetchingInstructor: true, instructorsData: null, instructorsDatastatus: null, instructorsDataServerError: null, })
@@ -367,6 +393,32 @@ export function fetchOrganizationStats(query){
     return organizationStats
 }
 
+//FETCH ORDER STATS
+export function fetchOrdersStats(query){
+    const [ studentStats, setStudentStats ] = useState({ isFetching: true, statsData: null, statsStatus: null, statsError: null, })
+    
+    useEffect(() => {
+        const fetchStudentStats = async () => {
+            try {
+                const { data, status} = !query ? await axios.get(`/orders/getOrderStats/${query}`, {withCredentials: true}) : await axios.get(`/orders/getOrderStats/${query}`, {withCredentials: true})
+                //console.log('Data from Hooks>>>', data, 'STATUS', status)
+
+                if(status === 200){
+                    setStudentStats({ isFetching: false, statsData: data, statsStatus: status, statsError: null})
+                } else{
+                    setStudentStats({ isFetching: false, statsData: null, statsStatus: status, statsError: null})
+                }
+            } catch (error) {
+                console.log('object', error)
+                setStudentStats({ isFetching: false, statsData: null, statsStatus: null, statsError: error})
+            }
+        }
+        fetchStudentStats()
+    }, [query])
+
+    return studentStats
+}
+
 //FETCH ORGANIZATION STATS
 export function fetchCourseStats(query){
     const [ courseStats, setCourseStats ] = useState({ isFetching: true, statsData: null, statsStatus: null, statsError: null, })
@@ -417,4 +469,31 @@ export function fetchCouponCodes(query){
     }, [all, id])
 
     return couponCodeData
+}
+
+//FETCH ALL ADVERT - both banner ads and recomendation ads
+export function fetchAllAdvert(query){
+    const { value, id } = query
+    const [ advertData, setAdvertData ] = useState({ isFetchingAdvert: true, advertData: null, advertDataStatus: null, advertDataServerError: null, })
+    
+    useEffect(() => {
+        const fetchAdvertData = async () => {
+            try {
+                const { data, status} = value ? await axios.get(`/advert/fetchAllAdvert/${value}`, {withCredentials: true}) : await axios.get(`/advert/fetchAdvert/${id}`, {withCredentials: true})
+                //console.log('Data from Hooks>>>', data, 'STATUS', status)
+
+                if(status === 200){
+                    setAdvertData({ isFetchingAdvert: false, advertData: data, advertDataStatus: status, advertDataServerError: null})
+                } else{
+                    setAdvertData({ isFetchingAdvert: false, advertData: null, advertDataStatus: status, advertDataServerError: null})
+                }
+            } catch (error) {
+                console.log('object', error)
+                setAdvertData({ isFetchingAdvert: false, advertData: null, advertDataStatus: null, advertDataServerError: error})
+            }
+        }
+        fetchAdvertData()
+    }, [value, id])
+
+    return advertData
 }

@@ -9,7 +9,7 @@ import Organizations from './Pages/Organizations/Organizations'
 import Course from './Pages/Course/Course'
 import Messages from './Pages/Messages'
 import CMS from './Pages/CMS/CMS'
-import Advert from './Pages/Advert'
+import Advert from './Pages/Advert/Advert'
 import Profile from './Pages/Profile'
 import { AuthorizeAdmin } from './Auth/ProtectRoute'
 import StudentDetails from './Pages/Student/StudentDetails'
@@ -29,7 +29,7 @@ import Signup from './Pages/Signup'
 import VerifyOtp from './Pages/VerifyOtp'
 import OrganizationDetails from './Pages/Organizations/OrganizationDetails'
 import OrganizationCourseInfo from './Pages/Organizations/OrganizationCourseInfo'
-import CoursesInfo from './Pages/Course/CoursesInfo'
+import CoursesInfo from './Pages/Course/SingleInfo'
 import Staffs from './Pages/Staffs/Staffs'
 import Settings from './Pages/Settings'
 import UpdateCountry from './Modals/UpdateCountry'
@@ -42,6 +42,12 @@ import AddCouponCode from './Modals/AddCouponCode'
 import DeleteCouponCode from './Modals/DeleteCouponCode'
 import EditCouponCode from './Modals/EditCouponCode'
 import PushNotifications from './Demo/PushNotifications'
+import Orders from './Pages/Orders/Orders'
+import BannerForm from './Pages/Advert/BannerForm'
+import RecommendationsForm from './Pages/Advert/RecommendationsForm'
+import AdvertRecomendationInfo from './Pages/Advert/AdvertRecomendationInfo'
+import AdvertBannerInfo from './Pages/Advert/AdvertBannerInfo'
+import SingleInfo from './Pages/Course/SingleInfo'
 
 function App() {
   const [ selectedCard, setSelectedCard ] = useState(null)
@@ -188,7 +194,10 @@ function App() {
             <Route path='/course' element={<Course />} />
           </Route>
           <Route element={<AuthorizeAdmin />} >
-            <Route path='/course-info/:id' element={<CoursesInfo setSelectedCard={setSelectedCard} setCouponCodeId={setCouponCodeId} />} />
+            <Route path='/course-info/:id' element={<SingleInfo />} />
+          </Route>
+          <Route element={<AuthorizeAdmin />} >
+            <Route path='/orders' element={<Orders />} />
           </Route>
           <Route element={<AuthorizeAdmin />} >
             <Route path='/messages' element={<Messages />} />
@@ -201,6 +210,18 @@ function App() {
           </Route>
           <Route element={<AuthorizeAdmin />} >
             <Route path='/advert' element={<Advert />} />
+          </Route>
+          <Route element={<AuthorizeAdmin />} >
+            <Route path='/advert-banner-info/:id' element={<AdvertBannerInfo />} />
+          </Route>
+          <Route element={<AuthorizeAdmin />} >
+            <Route path='/advert-recomendation-info/:id' element={<AdvertRecomendationInfo />} />
+          </Route>
+          <Route element={<AuthorizeAdmin />} >
+            <Route path='/new-advert-banner/:id' element={<BannerForm />} />
+          </Route>
+          <Route element={<AuthorizeAdmin />} >
+            <Route path='/new-advert-recomendation/:id' element={<RecommendationsForm />} />
           </Route>
           <Route element={<AuthorizeAdmin />} >
             <Route path='/profile' element={<Profile />} />

@@ -2,16 +2,9 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import Navbar from "../../Components/Helpers/Navbar"
 import Sidebar from "../../Components/Helpers/Sidebar"
 import { IoIosArrowBack } from "react-icons/io";
-import { fetchAllOrders, fetchStudentAllOrders } from "../../Helpers/fetch.api";
+import { fetchAllOrders } from "../../Helpers/fetch.api";
 import { formatDateAndTime } from "../../Helpers/formatDateAndTime";
 import Spinner from "../../Components/Helpers/Spinner";
-import Button from "../../Components/Helpers/Button";
-import { useState } from "react";
-import LoadingBtn from "../../Components/Helpers/LoadingBtn";
-import { updatePaymentStatus } from "../../Helpers/apis";
-import ErrorCard from "../../Components/Helpers/ErrorCard";
-import SuccessCard from "../../Components/Helpers/SuccessCard";
-
 
 function OrderInfo() {
   const navigate = useNavigate();
@@ -26,51 +19,11 @@ function OrderInfo() {
     navigate(-1); // Go back to the previous page
   };
 
-  const [ updating, setUpdating ] = useState(false)
-  const [ errorMsg, setErrorMsg ] = useState()
-  const [ successMsg, setSuccessMsg ] = useState() 
-
-  const handleUpdatePaymentStatus = async () => {
-    if(updating){
-      return
-    }
-    try {
-      setUpdating(true)
-      const res = await updatePaymentStatus({ id: dataArray?.orderId })
-      if(res.success){
-        setSuccessMsg(res?.data)
-        setTimeout(() => {
-          setSuccessMsg()
-        }, 2500)
-        window.location.reload()
-      } else {
-        setErrorMsg(res?.data)
-        setTimeout(() => {
-          setErrorMsg()
-        }, 2500)
-      }
-    } catch (error) {
-      
-    } finally {
-      setUpdating(false)
-    }
-  }
-
   return (
     <div className="page relative">
       <div className="fixed w-[257px] h-[100vh] left-0 top-0">
         <Sidebar />
       </div>
-      {
-        errorMsg && (
-          <ErrorCard errorMsg={errorMsg} />
-        )
-      }
-      {
-        successMsg && (
-          <SuccessCard successMsg={successMsg}  />
-        )
-      }
 
       <div className="section ml-auto">
         <Navbar />
@@ -105,7 +58,7 @@ function OrderInfo() {
 
                       <div
                             className={`py-[5px] px-[10px] rounded-[100px] ${
-                              dataArray?.orderStatus === 'Pending' || dataArray?.orderStatus === 'Initiated'
+                              dataArray?.orderStatus === 'Pending'
                                 ? "bg-[#D8E0E5] text-[#585858]" // Pending style
                                 : dataArray?.orderStatus === 'Successful'
                                 ? "bg-[#05A75312] text-primary-color" // Successful style
@@ -117,16 +70,6 @@ function OrderInfo() {
 
                     </div>
                   </div>
-                </div>
-                
-                <div className="">
-                  {
-                    updating ? (
-                      <LoadingBtn />
-                    ) : (
-                      <Button onCLick={handleUpdatePaymentStatus} text={dataArray?.paid ? `Reject Payment` :  `Approve Payment`} style={dataArray?.paid ? `` : `!bg-error !border-error` } />
-                    )
-                  }
                 </div>
 
               </div>
@@ -140,7 +83,7 @@ function OrderInfo() {
                 </div>
 
                 <div className="flex mt-[30px] flex-col gap-3">
-                <div className="flex p-[3px] gap-[4px]" >
+                  <div className="flex p-[3px] gap-[4px]" >
                       <p className="font-normal w-[300px] text-[14px] text-[#929292]">Order ID</p>
                       <p className="text-sm font-medium text-[#13693B] text-[14px]">{dataArray?.orderId}</p>
                   </div>
@@ -150,27 +93,7 @@ function OrderInfo() {
                   </div>
                   <div className="flex p-[3px] gap-[4px]" >
                       <p className="font-normal w-[300px] text-[14px] text-[#929292]">Amount</p>
-                      <p className="text-sm font-medium text-[#1F2A37] text-[14px] flex items-center gap-1">{dataArray?.currency}
-                      { 
-                        dataArray?.discount ? (
-                          <span className="flex items-center gap-[2px]">
-                            <p>
-                              {dataArray?.payableAmount?.toLocaleString()}
-                            </p>
-                            <p className="line-through font-semibold">
-                              {dataArray?.amount?.toLocaleString()}
-                            </p>
-                            <p className="text-[#13693B]">
-                              (Discount Percentage: {dataArray?.discountOff}%)
-                            </p>
-                          </span>
-                        ) : (
-                          <p>
-                            {dataArray?.amount?.toLocaleString()}
-                          </p>
-                        )
-                      }
-                      </p>
+                      <p className="text-sm font-medium text-[#1F2A37] text-[14px]">{dataArray?.amount?.toLocaleString()}</p>
                   </div>
                   <div className="flex p-[3px] gap-[4px]" >
                       <p className="font-normal w-[300px] text-[14px] text-[#929292]">Date</p>

@@ -8,7 +8,7 @@ function ErrorCard({ errorMsg, style }) {
         <div className="flex flex-col gap-[1rem]">
           <p className="text-text-color-2 font-semibold text-[16px]">Error</p>
 
-          <p className="text-text-color-2 font-semibold text-[16px]">{errorMsg}</p>
+          <p className="text-text-color-2 font-semibold text-[16px] text-error">{errorMsg}</p>
         </div>
       </div>
   )

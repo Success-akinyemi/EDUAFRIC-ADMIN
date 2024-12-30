@@ -182,7 +182,7 @@ function CourseTable({ data, loading, timeDate, setTimeDate }) {
                     <td className="px-6 py-4 text-[13px] text-[#121212] font-normal">
                       {order?.price?.toLocaleString()}
                     </td>
-                    <td className="px-6 text-center py-4 text-[13px] text-[#121212] font-normal">
+                    <td className="px-6 text-start py-4 text-[13px] text-[#121212] font-normal">
                       <p className="text-[13px] font-normal text-[#121212]">
                         {formattedDate}
                       </p>
@@ -191,7 +191,7 @@ function CourseTable({ data, loading, timeDate, setTimeDate }) {
                       </p>
                     </td>
                     <td className="px-6 py-4">
-                      <div className="relative cursor-pointer flex items-center justify-center gap-2 group">
+                      <div className="relative cursor-pointer flex items-center justify-between gap-2 group">
                         <div
                             className={`py-[5px] px-[10px] rounded-[100px] ${
                                 order?.isBlocked === true
@@ -231,18 +231,20 @@ function CourseTable({ data, loading, timeDate, setTimeDate }) {
       </div>
 
       <div className="w-full flex justify-center items-center pt-[30px]">
-        <div className="flex gap-[8px] items-center">
+        <div className="flex gap-[8px] items-center w-full">
           <button
             onClick={handlePreviousPage}
-            className="px-3 py-1 border rounded bg-white"
+            className="px-3 py-1 border rounded bg-white flex items-center gap-1 mr-auto"
           >
             <FaArrowLeft />
+            Previous
           </button>
           {renderPagination()}
           <button
             onClick={handleNextPage}
-            className="px-3 py-1 border rounded bg-white"
+            className="px-3 py-1 border rounded bg-white flex items-center gap-1 ml-auto"
           >
+            Next
             <FaArrowRight />
           </button>
         </div>

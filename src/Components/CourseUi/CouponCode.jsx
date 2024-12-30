@@ -189,7 +189,7 @@ function CouponCode({ data, loading, setSelectedCard, setCouponCodeId }) {
                     <td className="px-6 py-4 text-[13px] text-[#121212] font-normal">
                       {order?.students?.length}/{order.maxNumber}
                     </td>
-                    <td className="px-6 py-4 text-[13px] text-[#121212] font-normal">
+                    <td className="px-6 py-4 text-[13px] text-start text-[#121212] font-normal">
                       <p className="text-[13px] font-normal text-[#121212]">
                         {formattedDate}
                       </p>
@@ -198,7 +198,7 @@ function CouponCode({ data, loading, setSelectedCard, setCouponCodeId }) {
                       </p>
                     </td>
                     <td className="px-6 py-4">
-                      <div className="relative cursor-pointer flex items-center  gap-2 group">
+                      <div className="relative cursor-pointer flex items-center justify-between gap-2 group">
                         <div
                             className={`py-[5px] px-[10px] rounded-[100px] ${
                                 order?.active === false

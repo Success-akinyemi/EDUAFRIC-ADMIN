@@ -9,7 +9,7 @@ import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { MdOutlineDeleteOutline } from "react-icons/md";
 import { Link } from "react-router-dom";
 
-function CourseTable({ data, loading, timeDate, setTimeDate }) {
+function OrderTable({ data, loading, timeDate, setTimeDate }) {
     const [currentPage, setCurrentPage] = useState(1);
     const [searchTerm, setSearchTerm] = useState(""); // State for search input
     const studentData = data || [];
@@ -18,8 +18,8 @@ function CourseTable({ data, loading, timeDate, setTimeDate }) {
     // Filter students based on the search term (studentID or email)
     const filteredData = studentData.filter(
       (student) =>
-        student?.slugCode?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        student?.title?.toLowerCase().includes(searchTerm.toLowerCase())
+        student.orderId.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        student.email.toLowerCase().includes(searchTerm.toLowerCase())
     );
   
     // Calculate the total number of pages for filtered data
@@ -110,14 +110,14 @@ function CourseTable({ data, loading, timeDate, setTimeDate }) {
       <div className="flex w-full items-center justify-between">
         <div className="flex items-center gap-[50px]">
           <h3 className="text-lg font-semibold text-[#121212]">
-            {filteredData.length} Courses
+            {filteredData.length} Orders
           </h3>
           <div className="flex items-center w-[400px] bg-white gap-[6px]">
             <CiSearch className="text-[28px] cursor-pointer" />
             <input
               type="text"
               className="input"
-              placeholder="Search by Course ID or Title"
+              placeholder="Search by Order ID or Email"
               value={searchTerm}
               onChange={(e) => {
                 setSearchTerm(e.target.value); // Update search term on input change
@@ -147,13 +147,16 @@ function CourseTable({ data, loading, timeDate, setTimeDate }) {
                   Course Title
                 </th>
                 <th className="px-6 py-3 text-left text-gray-600 font-medium text-[12px]">
-                  Category
+                  Categories
                 </th>
                 <th className="px-6 py-3 text-left text-gray-600 font-medium text-[12px]">
-                  Course ID
+                  Order ID
                 </th>
                 <th className="px-6 py-3 text-left text-gray-600 font-medium text-[12px]">
                   Amount
+                </th>
+                <th className="px-6 py-3 text-left text-gray-600 font-medium text-[12px]">
+                  No of Courses
                 </th>
                 <th className="px-6 py-3 text-left text-gray-600 font-medium text-[12px]">
                   Date & Time
@@ -171,16 +174,35 @@ function CourseTable({ data, loading, timeDate, setTimeDate }) {
                 return (
                   <tr key={order?._id}>
                     <td className="px-6 py-4 text-[13px] text-[#121212] font-normal">
-                      {order?.title}
+                      {order?.courseTitle}
                     </td>
                     <td className="px-6 py-4 text-[13px] text-[#121212] font-normal">
-                      {order?.category[0]}
+                      {order?.categories[0]}
                     </td>
                     <td className="px-6 py-4 text-[13px] font-normal text-[#13693B]">
-                      {order?.slugCode}
+                      {order?.orderId}
                     </td>
                     <td className="px-6 py-4 text-[13px] text-[#121212] font-normal">
-                      {order?.price?.toLocaleString()}
+                      { 
+                        order?.discount ? (
+                          <span className="flex items-center gap-[2px]">
+                            <p>
+                              {order?.payableAmount?.toLocaleString()}
+                            </p>
+                            <p className="line-through font-medium">
+                              {order?.amount?.toLocaleString()}
+                            </p>
+
+                          </span>
+                        ) : (
+                          <p>
+                            {order?.amount?.toLocaleString()}
+                          </p>
+                        )
+                      }
+                    </td>
+                    <td className="px-6 py-4 text-[13px] text-[#121212] font-normal">
+                      {`1`}
                     </td>
                     <td className="px-6 text-start py-4 text-[13px] text-[#121212] font-normal">
                       <p className="text-[13px] font-normal text-[#121212]">
@@ -194,16 +216,14 @@ function CourseTable({ data, loading, timeDate, setTimeDate }) {
                       <div className="relative cursor-pointer flex items-center justify-between gap-2 group">
                         <div
                             className={`py-[5px] px-[10px] rounded-[100px] ${
-                                order?.isBlocked === true
-                                ? "bg-[#FEF3F2] text-error"// Pending style
-                                : order?.approved === 'Approved'
+                                order?.orderStatus === 'Pending' || order?.orderStatus === 'Initiated'
+                                ? "bg-[#D8E0E5] text-[#585858]" // Pending style
+                                : order?.orderStatus === 'Successful'
                                 ? "bg-[#05A75312] text-primary-color" // Successful style
-                                : order?.approved === 'Rejected'
-                                ? "bg-[#FEF3F2] text-error"
-                                : "bg-[#D8E0E5] text-[#585858]" // Inactive or other status style
+                                : "bg-[#FEF3F2] text-error" // Inactive or other status style
                             }`}
                         >
-                            {order?.isBlocked ? 'Blacklisted' : order?.approved }
+                            {order?.orderStatus}
                         </div>
 
                         <div>
@@ -213,7 +233,7 @@ function CourseTable({ data, loading, timeDate, setTimeDate }) {
                         {/* MODAL POPUP, visible only on hover */}
                         <div className="absolute z-50 top-8 flex flex-col gap-3 bg-white border-[1px] border-gray-200 shadow-lg rounded-[8px] p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 w-[170px]">
                           <Link
-                            to={`/instructor-course-info/${order?._id}`}
+                            to={`/order/${order?._id}`}
                             className="flex items-center gap-3 text-sm text-primary-color"
                           >
                             <MdOutlineRemoveRedEye />
@@ -253,4 +273,4 @@ function CourseTable({ data, loading, timeDate, setTimeDate }) {
   )
 }
 
-export default CourseTable
+export default OrderTable

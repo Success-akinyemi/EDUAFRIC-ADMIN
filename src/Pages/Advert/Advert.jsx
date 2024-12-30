@@ -1,17 +1,23 @@
 import { useState } from "react"
-import Navbar from "../Components/Helpers/Navbar"
-import Sidebar from "../Components/Helpers/Sidebar"
-import Banner from "../Components/AdvertUi/Banner"
-import Recommendations from "../Components/AdvertUi/Recommendations"
+import Navbar from "../../Components/Helpers/Navbar"
+import Sidebar from "../../Components/Helpers/Sidebar"
+import Banner from "../../Components/AdvertUi/Banner"
+import Recommendations from "../../Components/AdvertUi/Recommendations"
+import { fetchAllAdvert } from "../../Helpers/fetch.api"
 
 
 function Advert() {
   const [timeDate, setTimeDate] = useState();
-  const data = []
+  const { advertData: bannerData, isFetchingAdvert } =  fetchAllAdvert({ value: 'banner' })
+  const { advertData: recommendation, isFetchingAdvert: isFetchingRecommendation } =  fetchAllAdvert({ value: 'recommendation' })
+  const advertData = bannerData?.data || []
+  const recommendationData = recommendation?.data || []
+
+
   const options = [
     {
         name: 'Banners',
-        slug: 'banners'
+        slug: 'banner'
     },
     {
         name: 'Recommendations',
@@ -49,12 +55,12 @@ function Advert() {
 
               {
                     cardState === 'banner' && (
-                      <Banner data={data} loading={isFetchingAdvert} timeDate={timeDate} setTimeDate={setTimeDate} />
+                      <Banner data={advertData} loading={isFetchingAdvert} timeDate={timeDate} setTimeDate={setTimeDate} />
                     )
                   }
                   {
                     cardState === 'recommendations' && (
-                      <Recommendations />
+                      <Recommendations data={recommendationData} loading={isFetchingRecommendation} timeDate={timeDate} setTimeDate={setTimeDate} />
                     )
                   }
 

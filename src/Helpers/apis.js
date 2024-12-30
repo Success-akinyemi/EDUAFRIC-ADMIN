@@ -313,3 +313,51 @@ export async function deleteCouponCode({ id }) {
         return res?.data
     }
 }
+
+//CREATE ADVERT
+export async function createAdvert(formData) {
+    try {
+        const res = await axios.post('/advert/newAdvert', formData, {withCredentials: true})
+        return res.data
+    } catch (error) {
+        console.log('objectddd', error)
+        const res = error.response || 'Unable to create advert data'
+        return res?.data
+    }
+}
+
+//EDIT ADVERT
+export async function updateAdvert(formData) {
+    try {
+        const res = await axios.post('/advert/updateAdvert', formData, {withCredentials: true})
+        return res.data
+    } catch (error) {
+        console.log('objectddd', error)
+        const res = error.response || 'Unable to create advert data'
+        return res?.data
+    }
+}
+
+//DELETE ADVERT
+export async function deleteAdvert({ id }) {
+    try {
+        const res = await axios.post('/advert/deleteAdvert', { id }, {withCredentials: true})
+        return res.data
+    } catch (error) {
+        console.log('objectddd', error)
+        const res = error.response || 'Unable to delete advert data'
+        return res?.data
+    }
+}
+
+//HAND:E UPDATE COURSE PAYMENT STATUS
+export async function updatePaymentStatus({ id }){
+    try {
+        const res = await axios.post('/orders/updatePaymentStatus', { id }, {withCredentials: true})
+        return res.data
+    } catch (error) {
+        //console.log('objectddd', error)
+        const res = error.response || 'Unable to update course payment status'
+        return res?.data
+    }
+}

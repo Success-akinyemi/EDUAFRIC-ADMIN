@@ -262,20 +262,20 @@ function DataTable({ data, loading, timeDate, setTimeDate }) {
       </div>
 
       <div className="w-full flex justify-center items-center pt-[30px]">
-        <div className="flex gap-[8px] items-center justify-between w-full">
+        <div className="flex gap-[8px] items-center w-full">
           <button
             onClick={handlePreviousPage}
-            className="px-3 py-1 border rounded bg-white"
+            className="px-3 py-1 border rounded bg-white flex items-center gap-1 mr-auto"
           >
             <FaArrowLeft />
+            Previous
           </button>
-          <div className="">
-            {renderPagination()}
-          </div>
+          {renderPagination()}
           <button
             onClick={handleNextPage}
-            className="px-3 py-1 border rounded bg-white"
+            className="px-3 py-1 border rounded bg-white flex items-center gap-1 ml-auto"
           >
+            Next
             <FaArrowRight />
           </button>
         </div>

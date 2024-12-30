@@ -18,7 +18,7 @@ function OrderTable({ data, loading, timeDate, setTimeDate }) {
     // Filter students based on the search term (studentID or email)
     const filteredData = studentData.filter(
       (student) =>
-        student.orderID.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        student.orderId.toLowerCase().includes(searchTerm.toLowerCase()) ||
         student.email.toLowerCase().includes(searchTerm.toLowerCase())
     );
   
@@ -180,7 +180,7 @@ function OrderTable({ data, loading, timeDate, setTimeDate }) {
                       {order?.categories[0]}
                     </td>
                     <td className="px-6 py-4 text-[13px] font-normal text-[#13693B]">
-                      {order?.orderID}
+                      {order?.orderId}
                     </td>
                     <td className="px-6 py-4 text-[13px] text-[#121212] font-normal">
                       {order?.amount?.toLocaleString()}
@@ -188,7 +188,7 @@ function OrderTable({ data, loading, timeDate, setTimeDate }) {
                     <td className="px-6 py-4 text-[13px] text-[#121212] font-normal">
                       {`1`}
                     </td>
-                    <td className="px-6 text-center py-4 text-[13px] text-[#121212] font-normal">
+                    <td className="px-6 text-start py-4 text-[13px] text-[#121212] font-normal">
                       <p className="text-[13px] font-normal text-[#121212]">
                         {formattedDate}
                       </p>
@@ -197,7 +197,7 @@ function OrderTable({ data, loading, timeDate, setTimeDate }) {
                       </p>
                     </td>
                     <td className="px-6 py-4">
-                      <div className="relative cursor-pointer flex items-center justify-center gap-2 group">
+                      <div className="relative cursor-pointer flex items-center justify-between gap-2 group">
                         <div
                             className={`py-[5px] px-[10px] rounded-[100px] ${
                                 order?.orderStatus === 'Pending'
@@ -217,7 +217,7 @@ function OrderTable({ data, loading, timeDate, setTimeDate }) {
                         {/* MODAL POPUP, visible only on hover */}
                         <div className="absolute z-50 top-8 flex flex-col gap-3 bg-white border-[1px] border-gray-200 shadow-lg rounded-[8px] p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 w-[170px]">
                           <Link
-                            to={`/order/${order?.orderID}`}
+                            to={`/order/${order?._id}`}
                             className="flex items-center gap-3 text-sm text-primary-color"
                           >
                             <MdOutlineRemoveRedEye />
@@ -235,18 +235,20 @@ function OrderTable({ data, loading, timeDate, setTimeDate }) {
       </div>
 
       <div className="w-full flex justify-center items-center pt-[30px]">
-        <div className="flex gap-[8px] items-center">
+        <div className="flex gap-[8px] items-center w-full">
           <button
             onClick={handlePreviousPage}
-            className="px-3 py-1 border rounded bg-white"
+            className="px-3 py-1 border rounded bg-white flex items-center gap-1 mr-auto"
           >
             <FaArrowLeft />
+            Previous
           </button>
           {renderPagination()}
           <button
             onClick={handleNextPage}
-            className="px-3 py-1 border rounded bg-white"
+            className="px-3 py-1 border rounded bg-white flex items-center gap-1 ml-auto"
           >
+            Next
             <FaArrowRight />
           </button>
         </div>

@@ -15,7 +15,7 @@ import { approveCourse, rejectCourse } from "../../Helpers/apis";
 import Button from "../../Components/Helpers/Button";
 import CouponCode from "../../Components/CourseUi/CouponCode";
 
-function CoursesInfo({ setSelectedCard, setCouponCodeId }) {
+function SingleInfo({ setSelectedCard, setCouponCodeId }) {
     const navigate = useNavigate();
     const loc = useLocation();
     const pathName = loc.pathname.split("/")[2];
@@ -483,4 +483,4 @@ function CoursesInfo({ setSelectedCard, setCouponCodeId }) {
     );
 }
 
-export default CoursesInfo
+export default SingleInfo

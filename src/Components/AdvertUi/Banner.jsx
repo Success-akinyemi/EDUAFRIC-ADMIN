@@ -7,29 +7,31 @@ import { formatDateAndTime } from "../../Helpers/formatDateAndTime";
 import { FiMoreVertical } from "react-icons/fi";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { MdOutlineDeleteOutline } from "react-icons/md";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { blackListStudent } from "../../Helpers/apis";
 import toast from "react-hot-toast";
+import Button from "../Helpers/Button";
 
 function Banner({ data, loading, timeDate, setTimeDate }) {
-    useEffect(() => {console.log(alert('HELLOO'))})
+  const navigate = useNavigate()
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState(""); // State for search input
-  const studentData = data || [];
+  const bannerData = data || [];
   const itemsPerPage = 6;
 
   // Filter students based on the search term (studentID or email)
-  const filteredData = studentData.filter(
-    (student) =>
-      student.studentID.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      student.email.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredData = bannerData.filter(
+    (banner) =>
+      banner?.name?.toLowerCase().includes(searchTerm?.toLowerCase()) ||
+      banner?.destination?.toLowerCase().includes(searchTerm?.toLowerCase()) ||
+      banner?.startDate?.toLowerCase().includes(searchTerm?.toLowerCase()) 
   );
 
   // Calculate the total number of pages for filtered data
   const totalPages = Math.ceil(filteredData.length / itemsPerPage);
 
   // Get the current page's students based on filtered data
-  const currentStudents = filteredData.slice(
+  const currentBanners = filteredData.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
   );
@@ -127,19 +129,22 @@ function Banner({ data, loading, timeDate, setTimeDate }) {
     }
   };
 
+  const handleNewBanner = () => {
+    navigate('/new-advert-banner/noid')
+  }
   return (
     <div className="flex flex-col p-4 gap-[30px] bg-white border-[1px] border-white shadow-sm rounded-t-[12px]">
       <div className="flex w-full items-center justify-between">
         <div className="flex items-center gap-[50px]">
           <h3 className="text-lg font-semibold text-[#121212]">
-            {filteredData.length} Students
+            {filteredData.length} Banner
           </h3>
           <div className="flex items-center w-[400px] bg-white gap-[6px] rounded-[8px] border-[1px] py-[10px] px-[14px]">
             <CiSearch className="text-[21px] cursor-pointer" />
             <input
               type="text"
               className="input border-none p-0"
-              placeholder="Search by ID or Email"
+              placeholder="Search"
               value={searchTerm}
               onChange={(e) => {
                 setSearchTerm(e.target.value); // Update search term on input change
@@ -149,10 +154,12 @@ function Banner({ data, loading, timeDate, setTimeDate }) {
           </div>
         </div>
 
-        <div>
+        <div className="flex items-center gap-5">
           <div className="w-full flex">
             <DateFilter setTimeDate={setTimeDate} timeDate={timeDate} />
           </div>
+
+          <Button onCLick={handleNewBanner} text={`Add new banners`} style={`!border-none min-w-[185px]`} />
         </div>
       </div>
 
@@ -172,7 +179,7 @@ function Banner({ data, loading, timeDate, setTimeDate }) {
                   Description
                 </th>
                 <th className="px-6 py-3 text-left text-gray-600 font-medium text-[12px] tracking-wider">
-                  Type
+                  Name and Type
                 </th>
                 <th className="px-6 py-3 text-left text-gray-600 font-medium text-[12px] tracking-wider">
                   Organization Url
@@ -189,57 +196,61 @@ function Banner({ data, loading, timeDate, setTimeDate }) {
               </tr>
             </thead>
             <tbody>
-              {currentStudents.map((student) => {
+              {currentBanners.map((banner) => {
                 const { formattedDate, formattedTime } = formatDateAndTime(
-                  student?.createdAt
+                  banner?.createdAt
                 );
                 return (
-                  <tr key={student?._id}>
+                  <tr key={banner?._id}>
                     <td className="px-6 py-4 text-[14px] text-[#121212] font-normal">
-                      {student?.name}
+                      <img alt="" src={banner?.image} className="w-[60px]" />
                     </td>
                     <td className="px-6 py-4 text-[14px] text-[#121212] font-normal">
-                      {student?.description}
+                      {banner?.destination}
                     </td>
                     <td className="px-6 py-4 text-[14px] font-normal text-[#13693B]">
-                      {student?.type}
+                      <div className="flex flex-col">
+                        <p className="text-sm font-normal text-[#121212]">{banner?.name}</p>
+                        <p className="text-sm font-normal text-[#717171]">{banner?.type}</p>
+                      </div>
                     </td>
                     <td className="px-6 py-4 text-[14px] text-[#121212] font-normal">
-                      {student?.organizationUrl}
+                      {banner?.organizationUrl}
                     </td>
-                    <td className="px-6 text-center py-4 text-[14px] text-[#121212] font-normal">
+                    <td className="px-6 text-start py-4 text-[14px] text-[#121212] font-normal">
                       <p className="text-[14px] font-normal text-[#121212]">
-                        {formattedDate}
+                        {banner.startDate}
                       </p>
                       <p className="text-[14px] font-normal text-[#717171]">
                         {formattedTime}
                       </p>
                     </td>
-                    <td className="px-6 text-center py-4 text-[14px] text-[#121212] font-normal">
+                    <td className="px-6 text-start py-4 text-[14px] text-[#121212] font-normal">
                       <p className="text-[14px] font-normal text-[#121212]">
-                        {formattedDate}
+                        {banner?.endDate}
                       </p>
                       <p className="text-[14px] font-normal text-[#717171]">
                         {formattedTime}
                       </p>
                     </td>
                     <td className="px-6 py-4">
-                      <div className="relative cursor-pointer flex items-center justify-center gap-2 group">
-                        <div
-                          className={`py-[5px] px-[10px] rounded-[100px] ${
-                            student?.blocked
-                              ? "bg-[#D8E0E5] text-[#585858]" // Blacklisted style
-                              : student?.verified
-                              ? "bg-[#05A75312] text-primary-color" // Active style
-                              : "bg-[#FEF3F2] text-error" // Inactive style
-                          }`}
-                        >
-                          {student?.blocked
-                            ? "Blacklisted"
-                            : student?.verified
-                            ? "Active"
-                            : "Inactive"}
-                        </div>
+                      <div className="relative cursor-pointer flex items-center justify-between gap-2 group">
+                      <div
+  className={`py-[5px] px-[10px] rounded-[100px] ${
+    new Date(banner?.startDate) > new Date()
+      ? "bg-[#D8E0E5] text-[#585858]" // Pending
+      : new Date(banner?.endDate) > new Date()
+      ? "bg-[#05A75312] text-primary-color" // Active
+      : "bg-[#FEF3F2] text-error" // Inactive
+  }`}
+>
+  {new Date(banner?.startDate) > new Date()
+    ? "Pending"
+    : new Date(banner?.endDate) > new Date()
+    ? "Active"
+    : "Inactive"}
+</div>
+
 
                         <div>
                           <FiMoreVertical />
@@ -248,18 +259,22 @@ function Banner({ data, loading, timeDate, setTimeDate }) {
                         {/* MODAL POPUP, visible only on hover */}
                         <div className="absolute z-50 top-8 flex flex-col gap-3 bg-white border-[1px] border-gray-200 shadow-lg rounded-[8px] p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 w-[170px]">
                           <Link
-                            to={`/student/${student._id}`}
-                            className="flex items-center gap-3 text-sm text-primary-color"
+                            to={`/advert-banner-info/${banner._id}`}
+                            className="flex items-center gap-3 text-sm text-[#585858]"
                           >
-                            <MdOutlineRemoveRedEye />
                             View
+                          </Link>
+                          <Link
+                            to={`/new-advert-banner/${banner._id}`}
+                            className="flex items-center gap-3 text-sm text-[#585858]"
+                          >
+                            Edit
                           </Link>
                           <button
                             className="flex items-center gap-3 text-sm text-[#D34B56]"
-                            onClick={() => handleBlacklsitStudent(student._id)}
+                            onClick={() => handleBlacklsitStudent(banner._id)}
                           >
-                            <MdOutlineDeleteOutline />
-                            { student?.blocked ? 'Account BLocked' : blacklisting ? 'Blacklisting...' : 'Blacklist'}
+                            { banner?.blocked ? 'Account BLocked' : blacklisting ? 'Blacklisting...' : 'Blacklist'}
                           </button>
                         </div>
                       </div>
