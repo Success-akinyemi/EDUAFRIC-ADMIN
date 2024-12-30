@@ -21,7 +21,8 @@ function BannerForm() {
   const [ formData, setFormData ] = useState({ id: pathName === 'noid' ? '' : pathName, advertType: 'banner' })
   const [ errorMsg, setErrorMsg ] = useState()
   useEffect(() => {
-    setFormData(advertData?.data)
+    setFormData( advertData?.data)
+    setFormData({ ...formData, advertType: 'banner' })
   }, [advertData?.data?.name])
 
   const handleChange = (e) => {

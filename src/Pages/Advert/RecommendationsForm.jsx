@@ -20,6 +20,7 @@ function RecommendationsForm() {
   
   useEffect(() => {
     setFormData(advertData?.data)
+    setFormData({ ...formData, advertType: 'recommendation' })
   }, [advertData?.data?.name])
 
   const [ formData, setFormData ] = useState({ id: pathName === 'noid' ? '' : pathName, advertType: 'recommendation' })
