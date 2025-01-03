@@ -48,6 +48,7 @@ import RecommendationsForm from './Pages/Advert/RecommendationsForm'
 import AdvertRecomendationInfo from './Pages/Advert/AdvertRecomendationInfo'
 import AdvertBannerInfo from './Pages/Advert/AdvertBannerInfo'
 import SingleInfo from './Pages/Course/SingleInfo'
+import AppUpload from './Demo/AppUpload'
 
 function App() {
   const [ selectedCard, setSelectedCard ] = useState(null)
@@ -239,6 +240,7 @@ function App() {
 
         {/**DEMO */}
         <Route path='/demo/chat' element={<Chat />} />
+        <Route path='/demo/appUpload' element={<AppUpload />} />
         <Route path='/demo/file-upload' element={<FileUpload />} />
         <Route path='/demo/PushNotifications' element={<PushNotifications />} />
 
