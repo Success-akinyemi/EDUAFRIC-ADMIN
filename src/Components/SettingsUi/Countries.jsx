@@ -171,7 +171,7 @@ function Countries({ setSelectedCard, setCountryId }) {
   }
 
   return (
-    <div className="card px-[28px] py-[28px] border-[1px] border-white shadow-sm max-h-[1026px] mb-12 scrollbar-thin">
+    <div className="card px-[28px] py-[28px] border-[1px] border-white shadow-sm min-h-[1026px] mb-12 scrollbar-thin">
       {/**AVAILBLE COUNTRIES */}
       <div className="flex flex-col gap-6 w-full">
         <div className="flex w-full justify-between items-start">

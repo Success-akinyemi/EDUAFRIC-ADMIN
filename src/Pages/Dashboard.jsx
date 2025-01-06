@@ -1,3 +1,4 @@
+import { useState } from "react"
 import SalesReport from "../Components/DashboardUi/SalesReport"
 import Stats from "../Components/DashboardUi/Stats"
 import TopCourse from "../Components/DashboardUi/TopCourse"
@@ -5,6 +6,8 @@ import Navbar from "../Components/Helpers/Navbar"
 import Sidebar from "../Components/Helpers/Sidebar"
 
 function Dashboard() {
+  const [timeDate, setTimeDate] = useState();
+
   return (
     <div className="page relative">
       <div className="fixed w-[257px] h-[100vh] left-0 top-0">
@@ -23,7 +26,7 @@ function Dashboard() {
             <SalesReport />
           </div>
 
-          <TopCourse />
+          <TopCourse timeDate={timeDate} setTimeDate={setTimeDate} />
 
 
         </div>

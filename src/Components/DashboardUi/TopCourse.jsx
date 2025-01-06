@@ -6,12 +6,15 @@ import { topCourse } from "../../Data/topCourse";
 import { FaArrowLeft } from "react-icons/fa";
 import { FaArrowRight } from "react-icons/fa";
 import DateFilter from "../Helpers/DateFilter";
+import { fetchTopSellingCourse } from "../../Helpers/fetch.api";
 
-function TopCourse() {
+function TopCourse({ timeDate, setTimeDate }) {
   const [currentPage, setCurrentPage] = useState(1);
-  const [timeDate, setTimeDate] = useState();
 
   const itemsPerPage = 6;
+  console.log('object',timeDate)
+  const { courseData, isFetchingCourseContent } = fetchTopSellingCourse(timeDate?.value)
+
 
   // Calculate the total number of pages
   const totalPages = Math.ceil(topCourse.length / itemsPerPage);
@@ -96,7 +99,7 @@ function TopCourse() {
     }
   };
 
-
+  console.log('timeDate', timeDate)
 
   return (
     <div className="flex flex-col gap-6">

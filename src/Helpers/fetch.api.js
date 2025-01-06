@@ -497,3 +497,29 @@ export function fetchAllAdvert(query){
 
     return advertData
 }
+
+//FETCH TOP SELLING COURSE
+export function fetchTopSellingCourse(query){
+    const [ topSellingCourseData, setTopSellingCourseData ] = useState({ isFetchingCourseContent: true, courseData: null, courseDataStatus: null, courseDataServerError: null, })
+    console.log('QUERY', query)
+    useEffect(() => {
+        const fetchCourseData = async () => {
+            try {
+                const { data, status} = query ? await axios.get(`/orders/topSellingCourse/${query}`, {withCredentials: true}) : await axios.get(`/orders/topSellingCourse/${query}`, {withCredentials: true})
+                //console.log('Data from Hooks>>>', data, 'STATUS', status)
+
+                if(status === 200){
+                    setTopSellingCourseData({ isFetchingCourseContent: false, courseData: data, courseDataStatus: status, courseDataServerError: null})
+                } else{
+                    setTopSellingCourseData({ isFetchingCourseContent: false, courseData: null, courseDataStatus: status, courseDataServerError: null})
+                }
+            } catch (error) {
+                console.log('object', error)
+                setTopSellingCourseData({ isFetchingCourseContent: false, courseData: null, courseDataStatus: null, courseDataServerError: error})
+            }
+        }
+        fetchCourseData()
+    }, [query])
+
+    return topSellingCourseData
+}

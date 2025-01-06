@@ -195,7 +195,7 @@ function App() {
             <Route path='/course' element={<Course />} />
           </Route>
           <Route element={<AuthorizeAdmin />} >
-            <Route path='/course-info/:id' element={<SingleInfo />} />
+            <Route path='/course-info/:id' element={<SingleInfo setSelectedCard={setSelectedCard} setCouponCodeId={setCouponCodeId} />} />
           </Route>
           <Route element={<AuthorizeAdmin />} >
             <Route path='/orders' element={<Orders />} />
