@@ -35,7 +35,7 @@ function Stats() {
             <div key={item?._id} className="card flex flex-col gap-1">
               <p className="text-[14px] font-medium text-gray-500">{item?.title}</p>
               <div className="flex items-center justify-between">
-                <h2 className="text-[30px] font-semibold text-gray-900">{item?.total}</h2>
+                <h2 className="text-[30px] font-semibold text-gray-900">{item?.total?.toLocaleString()}</h2>
                 <span
                   className={`rounded-[16px] text-[14px] font-medium py-[2px] px-[9px] flex items-center justify-center ${
                     item?.slug === "positive"
