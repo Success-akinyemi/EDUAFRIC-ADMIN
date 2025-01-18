@@ -320,14 +320,17 @@ function SingleInfo({ setSelectedCard, setCouponCodeId }) {
                                     <h2 className="text-[#344054] text-[16px] font-semibold">
                                     Course Syllabus
                                     </h2>
-                                    <div className="text-xs font-normal text-[#585858]">
-                                    {dataArray?.syllabus?.map((item) => (
-                                        <div className="flex items-start gap-8 p-[2px]">
-                                        <p>{item?.period}:</p>
-                                        <p>{item?.mileStone}</p>
-                                        </div>
-                                    ))}
-                                    </div>
+                                    {/**
+                                     * 
+                                     */}
+                                     <div className="text-xs font-normal text-[#585858]">
+                                     {dataArray?.syllabus?.map((item, idx) => (
+                                         <div key={idx} className="flex items-start gap-8 p-[2px]">
+                                         <p>{item?.period}:</p>
+                                         <p>{item?.mileStone?.progress || ''}</p>
+                                         </div>
+                                     ))}
+                                     </div>
                                 </div>
             
                                 <div className="flex flex-col gap-[10px]">

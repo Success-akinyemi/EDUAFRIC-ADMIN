@@ -2,25 +2,25 @@ import { useState } from "react";
 import { CiCalendar } from "react-icons/ci";
 import { MdOutlineFilterList } from "react-icons/md";
 import { CiSearch } from "react-icons/ci";
-import { topCourse } from "../../Data/topCourse";
+//import { topCourse } from "../../Data/topCourse";
 import { FaArrowLeft } from "react-icons/fa";
 import { FaArrowRight } from "react-icons/fa";
 import DateFilter from "../Helpers/DateFilter";
 import { fetchTopSellingCourse } from "../../Helpers/fetch.api";
+import Spinner from "../Helpers/Spinner";
 
 function TopCourse({ timeDate, setTimeDate }) {
   const [currentPage, setCurrentPage] = useState(1);
 
   const itemsPerPage = 6;
-  console.log('object',timeDate)
   const { courseData, isFetchingCourseContent } = fetchTopSellingCourse(timeDate?.value)
-
+  const topCourse = courseData?.data
 
   // Calculate the total number of pages
-  const totalPages = Math.ceil(topCourse.length / itemsPerPage);
+  const totalPages = Math.ceil(topCourse?.length / itemsPerPage);
 
   // Get the current page's courses
-  const currentCourses = topCourse.slice(
+  const currentCourses = topCourse?.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
   );
@@ -99,8 +99,6 @@ function TopCourse({ timeDate, setTimeDate }) {
     }
   };
 
-  console.log('timeDate', timeDate)
-
   return (
     <div className="flex flex-col gap-6">
       {/* Search and Filter Bar */}
@@ -142,59 +140,68 @@ function TopCourse({ timeDate, setTimeDate }) {
             </tr>
           </thead>
           <tbody>
-            {currentCourses.map((course) => (
-              <tr key={course._id} className="border-t border-gray-200">
-                {/* Course Column */}
-                <td className="px-6 py-4">
-                  <div className="font-semibold text=-[14px] text-[#364152]">
-                    {course?.title}
-                  </div>
-                  <div className="text-[14px] font-normal text-gray-600">
-                    {course?.category.join(", ")}
-                  </div>
-                </td>
-                {/* Order Amount Column */}
-                <td className="px-6 py-4">
-                  <div className="text-[14px] font-normal text-gray-600">
-                    ${course?.price * course?.students?.length}
-                  </div>
-                </td>
-                {/* Uploaded Date Column */}
-                <td className="px-6 py-4">
-                  <div className="text-[14px] font-normal text-gray-600">
-                    {new Date(course.createdAt).toLocaleDateString("en-US", {
-                      month: "short",
-                      day: "2-digit",
-                      year: "numeric",
-                    })}
-                  </div>
-                </td>
-                {/* Instructor Column */}
-                <td className="px-6 py-4">
-                  <div className="flex items-center gap-2">
-                    {course.img ? (
-                      <img
-                        src={course.img}
-                        alt={`${course.instructorName}'s profile`}
-                        className="w-[32px] h-[32px] rounded-full"
-                      />
-                    ) : (
-                      <div className="w-[32px] h-[32px] rounded-full bg-gray-300 flex items-center justify-center text-gray-800 font-bold">
-                        {course.instructorName.charAt(0).toUpperCase()}
-                      </div>
-                    )}
-                    <div>
-                      <div className="text-[14px] font-semibold text-gray-900">
-                        {course.instructorName}
-                      </div>
-                      <div className="text-[14px] font-normal text-gray-600">
-                        {course.instructorEmailL}
+            {
+              isFetchingCourseContent ? (
+                <div className="">
+                <Spinner />
+                </div>
+              ) : (
+
+                currentCourses?.map(( course) => (
+                <tr key={course._id} className="border-t border-gray-200">
+                  {/* Course Column */}
+                  <td className="px-6 py-4">
+                    <div className="font-semibold text=-[14px] text-[#364152]">
+                      {course?.title}
+                    </div>
+                    <div className="text-[14px] font-normal text-gray-600">
+                      {course?.category?.join(", ")}
+                    </div>
+                  </td>
+                  {/* Order Amount Column */}
+                  <td className="px-6 py-4">
+                    <div className="text-[14px] font-normal text-gray-600">
+                      ${course?.totalRevenue}
+                    </div>
+                  </td>
+                  {/* Uploaded Date Column */}
+                  <td className="px-6 py-4">
+                    <div className="text-[14px] font-normal text-gray-600">
+                      {new Date(course?.createdAt).toLocaleDateString("en-US", {
+                        month: "short",
+                        day: "2-digit",
+                        year: "numeric",
+                      })}
+                    </div>
+                  </td>
+                  {/* Instructor Column */}
+                  <td className="px-6 py-4">
+                    <div className="flex items-center gap-2">
+                      {course?.img ? (
+                        <img
+                          src={course?.img}
+                          alt={`${course?.instructorName}'s profile`}
+                          className="w-[32px] h-[32px] rounded-full"
+                        />
+                      ) : (
+                        <div className="w-[32px] h-[32px] rounded-full bg-gray-300 flex items-center justify-center text-gray-800 font-bold">
+                          {course?.instructorName.charAt(0).toUpperCase()}
+                        </div>
+                      )}
+                      <div>
+                        <div className="text-[14px] font-semibold text-gray-900">
+                          {course?.instructorName}
+                        </div>
+                        <div className="text-[14px] font-normal text-gray-600">
+                          {course?.instructorEmailL}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </td>
-              </tr>
-            ))}
+                  </td>
+                  </tr>
+                ))
+              )
+            }
           </tbody>
         </table>
       </div>

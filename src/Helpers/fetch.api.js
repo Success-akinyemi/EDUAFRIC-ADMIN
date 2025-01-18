@@ -501,7 +501,6 @@ export function fetchAllAdvert(query){
 //FETCH TOP SELLING COURSE
 export function fetchTopSellingCourse(query){
     const [ topSellingCourseData, setTopSellingCourseData ] = useState({ isFetchingCourseContent: true, courseData: null, courseDataStatus: null, courseDataServerError: null, })
-    console.log('QUERY', query)
     useEffect(() => {
         const fetchCourseData = async () => {
             try {
@@ -522,4 +521,30 @@ export function fetchTopSellingCourse(query){
     }, [query])
 
     return topSellingCourseData
+}
+
+//FETCH DASHBOARD STATS
+export function fetchDashboardStats(query){
+    const [ dashboardStats, setDashboardStats ] = useState({ isFetchingStats: true, statsData: null, statsDataStatus: null, statsDataServerError: null, })
+    console.log('QUERY', query)
+    useEffect(() => {
+        const fetchDashboardStatsData = async () => {
+            try {
+                const { data, status} = query ? await axios.get(`/dashboard/dashboardStats/${query}`, {withCredentials: true}) : await axios.get(`/dashboard/dashboardStats/${query}`, {withCredentials: true})
+                //console.log('Data from Hooks>>>', data, 'STATUS', status)
+
+                if(status === 200){
+                    setDashboardStats({ isFetchingStats: false, statsData: data, statsDataStatus: status, statsDataServerError: null})
+                } else{
+                    setDashboardStats({ isFetchingStats: false, statsData: null, statsDataStatus: status, statsDataServerError: null})
+                }
+            } catch (error) {
+                console.log('object', error)
+                setDashboardStats({ isFetchingStats: false, statsData: null, statsDataStatus: null, statsDataServerError: error})
+            }
+        }
+        fetchDashboardStatsData()
+    }, [query])
+
+    return dashboardStats
 }

@@ -8,6 +8,7 @@ import { FiMoreVertical } from "react-icons/fi";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { MdOutlineDeleteOutline } from "react-icons/md";
 import { Link } from "react-router-dom";
+import { truncateText } from "../../Helpers/truncateText";
 
 function CourseTable({ data, loading, timeDate, setTimeDate }) {
     const [currentPage, setCurrentPage] = useState(1);
@@ -171,7 +172,7 @@ function CourseTable({ data, loading, timeDate, setTimeDate }) {
                 return (
                   <tr key={order?._id}>
                     <td className="px-6 py-4 text-[14px] text-[#121212] font-normal">
-                      {order?.title}
+                      {truncateText(order?.title, 20)}
                     </td>
                     <td className="px-6 py-4 text-[14px] text-[#121212] font-normal">
                       {order?.category[0]}

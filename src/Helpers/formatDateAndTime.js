@@ -22,6 +22,6 @@ export const formatDateAndTime = (createdAt) => {
   const createdAt = '2024-11-10T22:20:38.408Z';
   const { formattedDate, formattedTime } = formatDateAndTime(createdAt);
   
-  console.log('Date:', formattedDate); // "10 / 11 / 2024"
-  console.log('Time:', formattedTime);  // "10.20 PM"
+  //console.log('Date:', formattedDate); // "10 / 11 / 2024"
+  //console.log('Time:', formattedTime);  // "10.20 PM"
   
