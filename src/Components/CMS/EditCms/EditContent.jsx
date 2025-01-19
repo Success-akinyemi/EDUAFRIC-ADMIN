@@ -107,6 +107,8 @@ function EditContent({ data }) {
         }, 2000);
         return;
     }
+    /**
+     * 
     if (formData?.accountType === 'custom' && formData?.users.length < 1) {
         setErrorMsg("Provide at least one user email");
         setTimeout(() => {
@@ -114,6 +116,7 @@ function EditContent({ data }) {
         }, 2000);
         return;
     }
+     */
     try {
         setLoading(true)
         const res = await updateCms(formData)
