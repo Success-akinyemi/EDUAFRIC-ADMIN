@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from 'react';
 import io from 'socket.io-client';
 
-const socket = io('http://localhost:9000/general', {
+const socket = io('https://eduafric.onrender.com/general', {
   transports: ['websocket'],
   withCredentials: true,
 });
