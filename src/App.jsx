@@ -50,6 +50,7 @@ import AdvertBannerInfo from './Pages/Advert/AdvertBannerInfo'
 import SingleInfo from './Pages/Course/SingleInfo'
 import AppUpload from './Demo/AppUpload'
 import CourseChat from './Demo/courseChats'
+import Church from './Demo/church'
 
 function App() {
   const [ selectedCard, setSelectedCard ] = useState(null)
@@ -245,6 +246,7 @@ function App() {
         <Route path='/demo/file-upload' element={<FileUpload />} />
         <Route path='/demo/PushNotifications' element={<PushNotifications />} />
         <Route path='/demo/courseChat' element={<CourseChat />} />
+        <Route path='/church' element={<Church />} />
 
         </Routes>
       </BrowserRouter>
